@@ -24,16 +24,62 @@
         <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
             <div class="container px-4 px-lg-5">
                 <a class="navbar-brand" href="#page-top">
-                    <img src="{% static 'assets/img/logo_pur_beurre.png' %}" height="25rem" width="25rem"></img>
+                    <img src="{% static 'assets/img/logo_pur_beurre.png' %}" height="25rem" width="25rem" style="padding-bottom: 0.25rem"></img>
                     Pur Beurre
                 </a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto my-2 my-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#about">Recherche</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#services">Mon compte</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#portfolio">Mes aliments</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">Déconnexion</a></li>
+                        <li class="nav-item nav-search_item">
+                            <form class="form-inline my-2 my-lg-0">
+                                <input class="form-control mr-sm-2" type="search" placeholder="Chercher" aria-label="Chercher">
+                            </form>
+                        </li>
+                        <li class="nav-item nav-last-item"><a class="nav-link" href="/profile"><i class="bi bi-person"></i></a></li>
+                        <li class="nav-item nav-last-item"><a class="nav-link nav-link-with-img" href="/my_ingredients"><svg
+                            width="16px"
+                            height="22px"
+                            viewBox="0 0 210 297"
+                            version="1.1"
+                            id="svg2154"
+                            inkscape:version="1.1.2 (b8e25be833, 2022-02-05)"
+                            sodipodi:docname="clean_carrot.svg"
+                            xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+                            xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:svg="http://www.w3.org/2000/svg">
+                           <sodipodi:namedview
+                              id="namedview2156"
+                              pagecolor="#ffffff"
+                              bordercolor="#666666"
+                              borderopacity="1.0"
+                              inkscape:pageshadow="2"
+                              inkscape:pageopacity="0.0"
+                              inkscape:pagecheckerboard="0"
+                              inkscape:document-units="mm"
+                              showgrid="false"
+                              inkscape:zoom="0.733172"
+                              inkscape:cx="396.22353"
+                              inkscape:cy="452.8269"
+                              inkscape:window-width="2560"
+                              inkscape:window-height="1009"
+                              inkscape:window-x="-8"
+                              inkscape:window-y="-8"
+                              inkscape:window-maximized="1"
+                              inkscape:current-layer="layer1" />
+                           <defs
+                              id="defs2151" />
+                           <g
+                              inkscape:label="Calque 1"
+                              inkscape:groupmode="layer"
+                              id="layer1">
+                             <path
+                                d="m 133.48662,66.37951 c -0.18604,-1.874132 -1.66882,-3.356893 -3.54154,-3.541537 -5.76015,-0.574639 -11.46245,0.851641 -16.22495,3.935589 0.004,-0.235645 0.0331,-0.468524 0.0331,-0.705555 0,-10.37096 -4.60692,-20.095985 -12.63791,-26.677407 -1.453832,-1.193376 -3.553883,-1.193376 -5.00768,0 -8.03275,6.584245 -12.639322,16.307858 -12.639322,26.677407 0,0.460269 0.04685,0.915035 0.06477,1.372517 -4.943122,-3.5306 -11.009135,-5.215819 -17.161933,-4.601281 -1.872756,0.186034 -3.356892,1.668816 -3.541536,3.541537 -0.751028,7.576608 1.90306,15.003991 7.277453,20.37856 2.61553,2.61553 5.714647,4.561417 9.085439,5.808486 -5.563306,5.129036 -9.074503,12.450584 -9.074503,20.593404 0,8.27511 4.4704,34.96098 9.373306,62.14533 -0.0014,0.0496 -0.01379,0.0951 -0.01379,0.1447 0,0.55259 0.117133,1.08038 0.32246,1.55857 1.124479,6.21347 2.264128,12.43259 3.376189,18.44639 0.610482,3.3073 1.065213,5.76298 1.289826,7.04039 1.93615,10.92659 6.487936,13.06371 13.694833,13.06371 7.380818,0 11.990208,-2.15113 13.706128,-13.14379 0.32797,-2.09737 1.34359,-7.65351 2.62378,-14.68579 5.66773,-31.06384 11.71328,-65.00636 11.71328,-74.57369 0,-8.14281 -3.51123,-15.464365 -9.0745,-20.593401 3.37068,-1.248516 6.46853,-3.192921 9.08544,-5.808486 5.36892,-5.370336 8.02145,-12.79913 7.2718,-20.377149 z M 98.607126,47.832572 c 4.637264,4.90855 7.240054,11.389431 7.240054,18.232965 0,6.78815 -2.56176,13.25245 -7.211126,18.196983 -0.0096,0.0096 -0.0193,0.02205 -0.0303,0.03168 -4.670072,-4.951236 -7.24288,-11.421181 -7.24288,-18.228733 0.0028,-6.843181 2.608615,-13.323003 7.244291,-18.232964 z M 70.696407,70.708093 c 3.953581,0.409293 7.616472,2.145594 10.461978,4.992511 2.847022,2.848398 4.583289,6.534502 4.993922,10.461977 -3.954992,-0.410668 -7.616472,-2.145594 -10.4648,-4.993922 -2.845646,-2.845646 -4.579055,-6.532033 -4.9911,-10.460566 z m 47.596773,42.453277 c 0,9.65306 -7.53498,50.96228 -11.5824,73.15553 -1.34359,7.36423 -2.3151,12.68483 -2.65684,14.88404 -1.00735,6.45901 -1.94853,6.45901 -5.899498,6.45901 -3.932767,0 -4.751564,0 -5.910439,-6.54156 -0.228755,-1.29261 -0.687634,-3.76766 -1.30362,-7.09965 -0.702804,-3.8033 -1.639852,-8.87166 -2.684427,-14.61699 h 9.678106 c 2.181438,0 3.950758,-1.77077 3.950758,-3.95076 0,-2.18144 -1.77077,-3.95076 -3.950758,-3.95076 H 86.827206 c -0.58427,-3.25907 -1.185121,-6.63787 -1.785937,-10.05981 h 12.892969 c 2.181432,0 3.950762,-1.77077 3.950762,-3.95076 0,-2.18144 -1.77077,-3.95076 -3.950762,-3.95076 H 83.66861 c -0.610481,-3.55529 -1.201631,-7.08448 -1.762513,-10.50607 h 16.028106 c 2.181437,0 3.950757,-1.77077 3.950757,-3.95076 0,-2.18144 -1.77077,-3.95076 -3.950757,-3.95076 H 80.646681 c -1.55441,-10.02947 -2.627912,-18.27565 -2.627912,-21.96994 0,-11.10439 9.034286,-20.138672 20.138671,-20.138672 11.10439,-0.0014 20.13585,9.032872 20.13585,20.140082 z m 2.32753,-31.9913 c -2.84703,2.847023 -6.50981,4.583289 -10.4648,4.992511 0.41066,-3.927475 2.14697,-7.61365 4.99392,-10.461977 2.84427,-2.847023 6.50981,-4.583289 10.46198,-4.992511 -0.41067,3.928886 -2.14422,7.615061 -4.9911,10.461977 z"
+                                id="path1879"
+                                style="stroke-width:0.352778" />
+                           </g>
+                         </svg></a></li>
+                        <li class="nav-item nav-last-item"><a class="nav-link" href="/logout"><i class="bi bi-box-arrow-right"></i></a></li>
                     </ul>
                 </div>
             </div>
@@ -80,8 +126,8 @@
                     <div class="col-md-6 text-center text-muted small">
                         mentions légales
                     </div>
-                    <div class="col-md-6 text-center text-muted small">
-                        contact
+                    <div class="col-md-6">
+                        <a class="nav-link text-center text-muted small" href="#contact">contact</a>
                     </div>
                     <div class="small text-center text-muted">Copyright &copy; 2022 - Pur Beurre</div>
                 </div>

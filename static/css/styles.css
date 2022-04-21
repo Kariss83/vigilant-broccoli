@@ -3942,7 +3942,9 @@ textarea.form-control-lg {
 }
 
 .nav-link {
-  display: block;
+  display: flex;
+  align-content:center;
+  justify-content: center;
   padding: 0.5rem 1rem;
   color: #f4623a;
   text-decoration: none;
@@ -11363,7 +11365,7 @@ hr.divider-light {
   }
   #mainNav .navbar-nav .nav-item .nav-link {
     color: rgba(255, 255, 255, 0.7);
-    padding: 0 1rem;
+    /* padding:  1rem; */
   }
   #mainNav .navbar-nav .nav-item .nav-link:hover {
     color: #fff;
@@ -11455,4 +11457,45 @@ header.masthead h1, header.masthead .h1 {
 }
 #portfolio .container-fluid .portfolio-box:hover .portfolio-box-caption, #portfolio .container-sm .portfolio-box:hover .portfolio-box-caption, #portfolio .container-md .portfolio-box:hover .portfolio-box-caption, #portfolio .container-lg .portfolio-box:hover .portfolio-box-caption, #portfolio .container-xl .portfolio-box:hover .portfolio-box-caption, #portfolio .container-xxl .portfolio-box:hover .portfolio-box-caption {
   opacity: 1;
+}
+
+.bi-person::before{
+  align-self: center;
+}
+
+.nav-last-item{
+  width: 40px;
+}
+
+li.nav-item{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+li.nav-search_item form{
+    padding-top: 0.4rem;
+}
+
+button#button-addon2.btn.btn-outline-secondary{
+  color: white;
+}
+
+input.form-control.mr-sm-2{
+  background-color: lightgrey;
+  font-size: small;
+}
+
+svg{
+  fill: rgba(255, 255, 255, 0.7);
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+svg:hover{
+  fill: #fff;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+nav.navbar-shrink svg{
+  fill: #212529;
 }
