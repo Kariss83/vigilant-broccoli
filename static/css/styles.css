@@ -11499,3 +11499,15 @@ svg:hover{
 nav.navbar-shrink svg{
   fill: #212529;
 }
+
+@media only screen and (max-width: 992px) {
+  svg{
+    fill: rgba(0, 0, 0, 0.7);
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+  }
+  
+  svg:hover{
+    fill: #000;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+  }
+}
