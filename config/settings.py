@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'purbeurre.home.apps.HomeConfig'
+    'purbeurre.home.apps.HomeConfig',
+    'purbeurre.users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [

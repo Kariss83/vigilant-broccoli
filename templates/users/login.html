@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block masthead %}
+
+<header class="masthead">
+    <div class="container px-4 px-lg-5 h-100">
+        <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+            <div class="col-lg-8 align-self-end">
+                {% block h1topcontent %}{% endblock h1topcontent %}
+            </div>
+			<div class="col-lg-8 align-self-baseline">
+                <h2 class="text-center text-white-75 mb-5">Login</h2>
+				<div class="col-md-6 offset-md-3">
+					<form method="POST">
+						{% csrf_token %}
+						<div class="form-group">
+								
+							<input type="text" class="form-control"  placeholder="Email" name="email">
+						
+						</div>
+						<div class="form-group">
+						
+							<input type="password" class="form-control"  placeholder="Mot de Passe" name="password">
+						</div>
+					
+						<button type="submit" class="btn btn-secondary">Login</button>
+					
+						<div>
+							<a href="/register">Créer un compte</a
+						></div>
+					</form>
+				</div>
+            </div>
+        </div>
+    </div>
+</header>
+
+{% endblock masthead %}
+
