@@ -2,11 +2,24 @@
 
 {% load static %}
 
+{% block mastehead %}
+{% if messages %}
+{% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>	
+{% endfor %}
+{% endif %}
+</div>
+{% endblock mastehead %}
+
 
 {% block h1topcontent %}
 <h1 class="text-white font-weight-bold">Du gras, oui, mais de qualité !</h1>
 <hr class="divider" />
 {% endblock h1topcontent %}
+
 
 {% block h2topcontent %}
 <h2 class="text-white-75 mb-5">Trouvez un produit de substitution pour ceux que vous consommez tous les jours.</h2>
@@ -15,6 +28,7 @@
     <button class="btn btn-outline-secondary" type="button" id="button-addon2">Chercher</button>
   </div>
 {% endblock h2topcontent %}
+
 
 {% block midcontent %}
 <h2>Colette et Rémi</h2>
@@ -31,8 +45,8 @@
         <h3>Rémi</h3>
     </div>
 </div>
-
 {% endblock midcontent %}
+
 
 {% block contactcontent %}
 <h2 class="mt-0">Contactez-nous !</h2>
@@ -49,10 +63,3 @@
     </div>
 </div>
 {% endblock contactcontent %}
-
-
-
-{% comment %} <h2 class="text-white mt-0">We've got what you need!</h2>
-                        <hr class="divider divider-light" />
-                        <p class="text-white-75 mb-4">Start Bootstrap has everything you need to get your new website up and running in no time! Choose one of our open source, free to download, and easy to use themes! No strings attached!</p>
-                        <a class="btn btn-light btn-xl" href="#services">Get Started!</a> {% endcomment %}
