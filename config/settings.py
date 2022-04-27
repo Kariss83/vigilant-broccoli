@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'accounts',
     'purbeurre.home.apps.HomeConfig',
-    'purbeurre.users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
@@ -107,6 +107,10 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+# Custom user model
+
+AUTH_USER_MODEL = 'accounts.CustomUser'
 
 
 # Internationalization
