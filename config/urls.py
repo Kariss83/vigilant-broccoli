@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from purbeurre.home.views import HomeView
-from accounts.views import register_user
+from purbeurre.accounts.views import register_user
 
 urlpatterns = [
     path('admin/', admin.site.urls),
