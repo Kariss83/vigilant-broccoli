@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'purbeurre.accounts.apps.AccountsConfig',
     'purbeurre.home.apps.HomeConfig',
+    'purbeurre.products.apps.ProductsConfig',
 ]
 
 MIDDLEWARE = [
