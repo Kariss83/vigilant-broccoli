@@ -17,11 +17,12 @@ from django.contrib import admin
 from django.urls import path, include
 
 from purbeurre.home.views import HomeView
-from purbeurre.accounts.views import register_user
+from purbeurre.accounts.views import register_user, profile
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomeView.as_view(), name='home'),
-    path('users/', include('django.contrib.auth.urls')),
+    path('registration/', include('django.contrib.auth.urls')),
     path('register/', register_user, name='register'),
+    path('profile/', profile, name='profile'),
 ]
