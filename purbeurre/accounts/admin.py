@@ -41,8 +41,9 @@ class CustomUserAdmin(UserAdmin):
     )
     form = CustomUserChangeForm
     add_form = CustomUserCreationForm
-    list_display = ("email", "is_staff")
+    list_display = ("email", "name", "is_staff")
     list_filter = ("is_staff", "is_superuser", "is_active", "groups")
+    search_fields = ("name", "email")
     ordering = ("email",)
     filter_horizontal = (
         "groups",

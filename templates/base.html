@@ -37,11 +37,11 @@
                         </li>
                         {% if user.is_authenticated %}
                             <li class="nav-item nav-last-item">
-                                <a class="nav-link" href="/profile"><i class="bi bi-person"></i></a>
+                                <a class="nav-link" href="profile"><i class="bi bi-person"></i></a>
                             </li>
                         {% else %}
                             <li class="nav-item nav-last-item">
-                                <a class="nav-link" href="/login"><i class="bi bi-person-plus"></i></a>
+                                <a class="nav-link" href="/registration/login"><i class="bi bi-person-plus"></i></a>
                             </li>
                         {% endif %}
                         <li class="nav-item nav-last-item"><a class="nav-link nav-link-with-img" href="/my_ingredients"><svg
@@ -90,7 +90,7 @@
                         </li>
                         {% if user.is_authenticated %}
                             <li class="nav-item nav-last-item">
-                                <a class="nav-link" href="/logout"><i class="bi bi-box-arrow-right"></i></a>
+                                <a class="nav-link" href="/registration/logout"><i class="bi bi-box-arrow-right"></i></a>
                             </li>
                         {% else %}
                             <li class="nav-item nav-last-item">
@@ -108,7 +108,7 @@
                     {% if messages %}
                         {% for message in messages %}
                             <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                {{message}}
+                                {{ message }}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>	
                         {% endfor %}

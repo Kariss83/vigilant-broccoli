@@ -59,4 +59,4 @@ def register_user(request):
 # profile view
 @login_required
 def profile(request):
-	return render(request, 'registration/profile.html', {})
+	return render(request, 'accounts/profile.html', {})
