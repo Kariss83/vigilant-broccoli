@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block about %}
+<section class="page-section bg-primary" id="about">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8 text-center">
+                {% block midcontent %}{% endblock midcontent %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock about %}
+
+{% block contact %}
+<section class="page-section" id="contact">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8 col-xl-6 text-center">
+                {% block contactcontent %}{% endblock contactcontent %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock contact %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block h2topcontent %}
+<h2 class="text-center text-white-75 mb-5">Créer un compte</h2>
+<div class="col-md-6 offset-md-3">
+    <form method="POST" action="{% url 'register' %}">
+        {% csrf_token %}
+        
+            {{ form.as_p }}
+
+        <input type="submit" value="S'enregistrer" class="btn btn-secondary">
+    </form>
+</div>
+<br/><br/>
+{% endblock h2topcontent %}

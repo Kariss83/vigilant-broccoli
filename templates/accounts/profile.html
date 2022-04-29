@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block about %}
+<section class="page-section bg-primary" id="about">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h2 class="text-white-75 mb-5">{{ user.name }}</h2>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock about %}
+
+
+{% block h1topcontent %}
+    <h1 class="text-white font-weight-bold">Ahoy</h1>
+    <hr class="divider" />
+    <br/><br/>
+{% endblock h1topcontent %}
+
+{% block h2topcontent %}
+    <h2 class="text-white-75 mb-5">{{ user.email }} </h2>
+{% endblock h2topcontent %}

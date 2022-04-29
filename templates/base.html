@@ -35,7 +35,15 @@
                                 <input class="form-control mr-sm-2" type="search" placeholder="Chercher" aria-label="Chercher">
                             </form>
                         </li>
-                        <li class="nav-item nav-last-item"><a class="nav-link" href="/profile"><i class="bi bi-person"></i></a></li>
+                        {% if user.is_authenticated %}
+                            <li class="nav-item nav-last-item">
+                                <a class="nav-link" href="profile"><i class="bi bi-person"></i></a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item nav-last-item">
+                                <a class="nav-link" href="/registration/login"><i class="bi bi-person-plus"></i></a>
+                            </li>
+                        {% endif %}
                         <li class="nav-item nav-last-item"><a class="nav-link nav-link-with-img" href="/my_ingredients"><svg
                             width="16px"
                             height="22px"
@@ -78,8 +86,17 @@
                                 id="path1879"
                                 style="stroke-width:0.352778" />
                            </g>
-                         </svg></a></li>
-                        <li class="nav-item nav-last-item"><a class="nav-link" href="/logout"><i class="bi bi-box-arrow-right"></i></a></li>
+                         </svg></a>
+                        </li>
+                        {% if user.is_authenticated %}
+                            <li class="nav-item nav-last-item">
+                                <a class="nav-link" href="/registration/logout"><i class="bi bi-box-arrow-right"></i></a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item nav-last-item">
+                                <a class="nav-link" href="/"><i class="bi bi-box-arrow-right"></i></a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
@@ -88,9 +105,16 @@
         <header class="masthead">
             <div class="container px-4 px-lg-5 h-100">
                 <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>	
+                        {% endfor %}
+				    {% endif %}
                     <div class="col-lg-8 align-self-end">
                         {% block h1topcontent %}{% endblock h1topcontent %}
-                        <hr class="divider" />
                     </div>
                     <div class="col-lg-8 align-self-baseline">
                         {% block h2topcontent %}{% endblock h2topcontent %}
@@ -98,36 +122,24 @@
                 </div>
             </div>
         </header>
-        <!-- About-->
-        <section class="page-section bg-primary" id="about">
-            <div class="container px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-lg-8 text-center">
-                        {% block midcontent %}{% endblock midcontent %}
-                    </div>
-                </div>
-            </div>
-        </section>
 
+        <!-- About-->
+        {% block about %}
+        {% endblock about %}
+        
         <!-- Contact-->
-        <section class="page-section" id="contact">
-            <div class="container px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-lg-8 col-xl-6 text-center">
-                        {% block contactcontent %}{% endblock contactcontent %}
-                    </div>
-                </div>
-            </div>
-        </section>
+        {% block contact %}
+        {% endblock contact %}
+        
         <!-- Footer-->
         <footer class="bg-light py-5">
             <div class="container px-4 px-lg-5">
                 <div class="row">
                     <div class="col-md-6 text-center text-muted small">
-                        mentions légales
+                        Mentions Légales
                     </div>
-                    <div class="col-md-6">
-                        <a class="nav-link text-center text-muted small" href="#contact">contact</a>
+                    <div class="col-md-6 ">
+                        <a class="nav-link text-center text-muted small" href="#contact">Contact</a>
                     </div>
                     <div class="small text-center text-muted">Copyright &copy; 2022 - Pur Beurre</div>
                 </div>
