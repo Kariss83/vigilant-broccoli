@@ -1,16 +1,67 @@
 {% extends 'base.html' %}
+{% load static %}
 
 
 {% block h1topcontent %}
+    <div class="rounded" style="background:#343A40 url('{{searched_prod.image}}') no-repeat center" id="product_picture">
+        <img src="{{searched_prod.image}}" alt="Image du produit" class="rounded">
+    </div>
     {{ searched_prod }}
 {% endblock h1topcontent %}
 
 
-{% block h2topcontent %}
-    {% for prod in substitut_prods %}
-        <p>{{ prod }}</p>
-        <p>{{ prod.nutriscore }}</p>
+{% block about %}
 
-    {% endfor %}
-{% endblock h2topcontent %}
+<section class="page-section bg-primary" id="about">
+    <div class="row">
+        {% for prod in substitut_prods %}
+            <!-- feaure box -->
+            <div class="col-sm-2 col-lg-4" id="box_product">
+                <div class="feature-box-1 ">
+                    <div class="icon">
+                        Nutriscore : {{prod.nutriscore}}
+                    </div>
+                    <div class="rounded mx-auto d-block" id="product_picture">
+                        <img src="{{prod.image}}" alt="Image du produit" class="rounded img-fluid">
+                    </div>
+                    <div class="row">
+                        <div>
+                            <h5 class="col text-dark text-center">
+                                <form id="produrl" method=POST action="{% url 'product' %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="prod_id" value="{{ prod.id }}">
+                                    <button type="submit" name="submit_param" value="submit_value" class="link-button btn btn-primary text-dark">
+                                        {{ prod.name }}
+                                    </button>
+                                </form>
+                            </h5>
+                        </div>
+                        <div class="col">
+                            <p>
+                                {% if user.is_authenticated %}
+                                    {% if prod.active == True %}
+                                    <button class="btn btn-outline-dark btn-block" type="submit" disabled>
+                                        <img src="{% static 'assets/img/logo_pur_beurre.png' %}" height="25rem" width="25rem" style="padding-bottom: 0.25rem"></img>
+                                    </button>
+                                    {% else %}
+                                    <form id="prodfav" method=POST action="{% url 'home' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="favprod" value="{{ prod.id_product }}">
+                                        <button class="btn btn-outline-dark btn-block" type="submit">
+                                            <i class="bi bi-save2"> Sauvegarder</i>
+                                        </button>
+                                    </form>
+                                    {% endif %}
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- / -->
+        {% endfor %}
+    </div> 
+</section>
+    
+{% endblock about %}
 

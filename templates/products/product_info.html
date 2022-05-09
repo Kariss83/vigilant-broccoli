@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block h1topcontent %}
+    <div class="rounded" style="background:#343A40 url('{{product.image}}') no-repeat center" id="product_picture">
+        <img src="{{product.image}}" alt="Image du produit" class="rounded">
+    </div>
+    {{ product.name }}
+    <p><a href="{{ product.url }}"> Voir sur OFF</a></p>
+    <p>Infos :</p>
+    <ul>
+        <li>Energie : {{ product.energy }} kcal par 100g</li>
+        <li>Graisses : {{ product.fat }} g par 100g</li>
+        <li>Graisses saturées : {{ product.saturated_fat }} g par 100g</li>
+        <li>Sucres : {{ product.sugar }} g par 100g</li>
+        <li>Nutriscore : {{ product.nutriscore }}</li>
+    </ul>
+{% endblock h1topcontent %}
