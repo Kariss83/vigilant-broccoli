@@ -18,7 +18,7 @@ from django.urls import path, include
 
 from purbeurre.home.views import HomeView
 from purbeurre.accounts.views import register_user, profile
-from purbeurre.products.views import SearchView
+from purbeurre.products.views import search_product
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,5 +26,5 @@ urlpatterns = [
     path('registration/', include('django.contrib.auth.urls')),
     path('register/', register_user, name='register'),
     path('profile/', profile, name='profile'),
-    path('search/', SearchView.as_view(), name='search')
+    path('search/', search_product, name='search')
 ]
