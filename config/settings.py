@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'purbeurre.accounts.apps.AccountsConfig',
     'purbeurre.home.apps.HomeConfig',
+    'purbeurre.products.apps.ProductsConfig',
 ]
 
 MIDDLEWARE = [
@@ -81,7 +82,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'purbeurre4',
+        'NAME': 'purbeurredb2',
         'USER': os.environ['DB_USER'],
         'PASSWORD': os.environ['DB_PWD'],
         'HOST': '127.0.0.1',
