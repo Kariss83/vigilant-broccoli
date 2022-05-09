@@ -3,7 +3,7 @@ from purbeurre.accounts.models import CustomUser
 
 # Create your models here.
 class Categories(models.Model):
-    """Cet objet représente une catégorie ou un genre littéraire."""
+    """Cet objet représente une catégorie"""
     name = models.CharField(max_length=200, 
                             help_text='Entrez le nom d\'une catégorie.')
 
@@ -28,6 +28,13 @@ class Products(models.Model):
     def __str__(self):
         return self.name
 
+# Table de jonction pour les catégories
+class ProductCategory(models.Model):
+    """  """
+    id_product = models.ForeignKey(Products, on_delete=models.CASCADE)
+    id_category = models.ForeignKey(Categories, on_delete=models.CASCADE)
+
+# Table qui va sauver les favoris des utilisateurs
 class Favorites(models.Model):
     searched_product = models.ForeignKey(Products,
                                         on_delete=models.CASCADE,
