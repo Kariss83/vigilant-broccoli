@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+{% block h1topcontent %}
+    {{ searched_prod }}
+{% endblock h1topcontent %}
+
+
+{% block h2topcontent %}
+    {% for prod in substitut_prods %}
+        <p>{{ prod }}</p>
+        <p>{{ prod.nutriscore }}</p>
+
+    {% endfor %}
+{% endblock h2topcontent %}
+
