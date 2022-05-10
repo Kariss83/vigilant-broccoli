@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block h1topcontent %}
+    <h1>Cette page affiche les produits que vous avez sauvegardés</h1>
+    {% for prod in favorites %}
+        <ul>
+            <li>{{ prod.searched_product }}</li>
+        </ul>
+    {% endfor %}
+{% endblock h1topcontent %}
