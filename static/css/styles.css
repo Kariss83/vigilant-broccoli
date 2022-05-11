@@ -11512,3 +11512,28 @@ nav.navbar-shrink svg{
   }
 }
 
+header.masthead_search {
+  padding-top: 10rem;
+  padding-bottom: calc(10rem - 4.5rem);
+  background: black;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+}
+
+#searched_product_name{
+  background-color: var(--bs-light);
+}
+
+.btn-circle.btn-sm {
+  width: 35px;
+  height: 35px;
+  padding: 6px 0px;
+  border-radius: 21px;
+  font-size: 14px;
+  text-align: center;
+}
+
+button.btn-circle.btn-sm{
+  position:absolute;
+}

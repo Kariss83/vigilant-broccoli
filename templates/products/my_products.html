@@ -4,7 +4,11 @@
     <h1>Cette page affiche les produits que vous avez sauvegardés</h1>
     {% for prod in favorites %}
         <ul>
-            <li>{{ prod.searched_product }}</li>
+            <li>{{ prod.searched_product }}
+                <ul>
+                    <li>{{ prod.searched_product.url }}</li>
+                </ul>
+            </li>
         </ul>
     {% endfor %}
 {% endblock h1topcontent %}
