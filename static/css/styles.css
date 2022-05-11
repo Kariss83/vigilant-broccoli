@@ -11537,3 +11537,7 @@ header.masthead_search {
 button.btn-circle.btn-sm{
   position:absolute;
 }
+
+#product_presentation{
+  color: lightgray;
+}
