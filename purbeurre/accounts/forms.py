@@ -6,6 +6,33 @@ from django.utils.translation import gettext_lazy as _
 from purbeurre.accounts.models import CustomUser
 
 
+class CustomAuthenticationForm(test_form.Form):
+    """
+    Base class for authenticating users. Extend this to get a form that accepts
+    username/password logins.
+    """
+
+    username = test_form.EmailField(widget=test_form.TextInput(attrs={"autofocus": True}))
+    password = test_form.CharField(
+        label=_("Password"),
+        strip=False,
+        widget=test_form.PasswordInput(attrs={"autocomplete": "current-password"}),
+    )
+
+    error_messages = {
+        "invalid_login": _(
+            "Please enter a correct %(username)s and password. Note that both "
+            "fields may be case-sensitive."
+        ),
+        "inactive": _("This account is inactive."),
+    }
+
+
+    def clean(self):
+        username = self.cleaned_data.get("email")
+        password = self.cleaned_data.get("password")
+
+
 
 class CustomUserChangeForm(forms.UserChangeForm):
     password = forms.ReadOnlyPasswordHashField(

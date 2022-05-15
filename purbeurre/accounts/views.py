@@ -4,30 +4,31 @@ from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 
-from purbeurre.accounts.forms import CustomUserCreationForm
+from purbeurre.accounts.forms import CustomUserCreationForm, CustomAuthenticationForm
 
 
 # Create your views here.
 
 # login view
 def login_user(request):
+	# import pdb; pdb.set_trace()
 	if request.method == 'POST':
-		form = AuthenticationForm(request.POST)
+		form = CustomAuthenticationForm(request.POST)
 		if form.is_valid():
-			email = request.POST['email']
-			password = request.POST['password']
+			email = request.POST.get('username','')
+			password = request.POST.get('password', '')
 			user = authenticate(request, email=email, password=password)
 			if user is not None:
 				login(request, user)
 				messages.success(request, ('Vous êtes connecté(e)!'))
 				return redirect('/')
+		else:
+			messages.success(request, (
+				'Erreur de connexion - Veuillez reéssayer...'))
+			return redirect('/login')
 
-			else:
-				messages.success(request, (
-					'Erreur de connexion - Veuillez reéssayer...'))
-				return redirect('/login')
 	else:
-		return render(request, 'accounts/login.html', {})
+		return render(request, 'registration/login.html', {})
 
 # logout view
 @login_required

@@ -38,7 +38,7 @@ def save_favorite(request):
         user_id = request.user.id
         substitut_id = request.POST.get('favprod', None)
         searched_id = request.POST.get('searched_prod_id', None)
-        saver.save_favorite_product(user_id, substitut_id, searched_id)
+        saver.save_favorite_product(user_id, searched_id, substitut_id)
         return render(request, 'products/my_products.html', {})
     else:
         return render(request, 'search/search.html', {})
