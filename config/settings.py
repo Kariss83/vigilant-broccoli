@@ -138,3 +138,15 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Handling redirection from decorator @loginrequired
+LOGIN_URL='/registration/login/'
+LOGIN_REDIRECT_URL='/registration/login/'
+
+# Help for resolving tests errors on POST test on some views
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    }
+}

@@ -1,6 +1,7 @@
 """ This module is designed to host all the unit tests for the part of the
 program in charge of parsing the sentence the user will pass to GrandPy.
 """
+import random
 from django.test import TestCase
 
 from purbeurre.accounts.models import CustomUser
@@ -22,7 +23,7 @@ def create_a_category(name):
     category = Categories.objects.create(name=name)
     return category
 
-def create_a_product(number,nutri, category):
+def create_a_product(number, nutri, category):
     prod = Products.objects.create(
             name = f"test{number}", 
             url = f"http://test{number}.com",
@@ -44,67 +45,73 @@ def create_a_favorite(user, searched_prod, replacement_prod):
             user = user
             )
     return favorite
-    
-
-class TestAccountsModule(TestCase):
-    """ Main class testing all the actions the parser is supposed to be able to 
-    achieve.
-    """   
-    def test_(self):
-        pass
         
 
 class TestProductsModule(TestCase):
     """ Main class testing all the actions the parser is supposed to be able to 
     achieve.
     """
+    @classmethod
+    def setUpTestData(cls):
+        cls.user = create_an_user(1)
+        # import pdb; pdb.set_trace()
+        cls.cat = create_a_category("Test")
+        for i in range(10):
+            create_a_product(i, random.choice(["a","b","c","d","e"]), cls.cat)
+
+
     def test_favorite_handler_can_save_favs(self):
-        create_an_user(1)
-        category = create_a_category("Test")
-        create_a_product(1, "B", category)
-        create_a_product(2, "A", category)
         SFP.save_favorite_product(1, 1, 2)
-        self.assertNotEqual(Favorites.objects.all, None)
+        self.assertIsNotNone(Favorites.objects.all)
+
+    def test_favorite_handler_returns_text_if_fail_saving(self):
+        self.assertEqual(
+            SFP.save_favorite_product(self.user.id + 1, 1, 2),
+            "Impossible de sauvegarder le produit."
+            )
 
     def test_favorite_handler_can_retrieve_favs(self):
-        user_test = create_an_user(1)
-        category = create_a_category("test")
-        prod1 = create_a_product(1, "B", category)
-        prod2 = create_a_product(2, "A", category)
-        prod3 = create_a_product(3, "B", category)
-        prod4 = create_a_product(4, "A", category)
+        prod1, prod2, prod3, prod4 = Products.objects.all()[:4]
         Favorites.objects.create(
             searched_product = prod1,
             substitution_product = prod2, 
-            user = user_test
+            user = self.user
             )
         Favorites.objects.create(
             searched_product = prod3,
             substitution_product = prod4, 
-            user = user_test
+            user = self.user
             )
-        self.assertEqual(GAF.get_users_favorite(1).count(), 2)
+        self.assertEqual(GAF.get_users_favorite(self.user.id).count(), 2)
+    
+    def test_favorite_handler_returns_text_if_fail_retrieving(self):
+        self.assertEqual(
+            GAF.get_users_favorite(self.user.id + 1),
+            "Impossible de retourner vos favoris, veuillez rééssayer."
+        )
 
     def test_get_product_can_retrieve_a_given_object(self):
-        category = create_a_category("Test")
-        prod5 = create_a_product(5, "A", category)
         # import pdb; pdb.set_trace()
-        self.assertEqual(GP.find_a_product_by_id(7), prod5)
+        prod = Products.objects.create(
+            name = "test", 
+            url = "http://test.com",
+            image = "http://test_image.com",
+            nutriscore = "C",
+            energy = 10,
+            fat = 10,
+            saturated_fat = 10,
+            sugar = 10,
+            salt = 10,
+            category = self.cat
+            )
+        self.assertEqual(GP.find_a_product_by_id(prod.id), prod)
     
     def test_get_product_return_text_when_prod_not_found(self):
-        self.assertEqual(GP.find_a_product_by_id(10), "produit introuvable")
+        ne_id = Products.objects.latest('id').id + 1
+        self.assertEqual(GP.find_a_product_by_id(ne_id), "produit introuvable")
 
     def test_search_module_can_retrieve_substitutes(self):
-        category = create_a_category("test")
-        prod = create_a_product(10, "B", category)
-        create_a_product(1, "B", category)
-        create_a_product(2, "A", category)
-        create_a_product(3, "B", category)
-        create_a_product(4, "A", category)
-        create_a_product(5, "B", category)
-        create_a_product(6, "A", category)
-        create_a_product(7, "B", category)
-        create_a_product(8, "A", category)
+        prod = Products.objects.all()[0]
         self.assertEqual(
             SearchModule.find_all_possible_substitute(prod)[1].count(),
             6)
@@ -114,10 +121,3 @@ class TestProductsModule(TestCase):
             SearchModule.find_all_possible_substitute("wrong_prod")[0],
             "produit introuvable")
 
-
-class TestHomeModule(TestCase):
-    """ Main class testing all the actions the parser is supposed to be able to 
-    achieve.
-    """
-    def test_search_module_return_highest_nutriscore(self):
-        pass

@@ -1,5 +1,6 @@
 # Create your views here.
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
 from purbeurre.products.controllers.find_substitute import SearchModule
 from purbeurre.products.controllers.get_product import GetProductModule
@@ -17,7 +18,7 @@ def search_product(request):
                    'substitut_prods': substit[1]}
         return render(request, 'search/search.html', context)
     else :
-        return render(request, 'search/search.html', {})
+        return render(request, 'home/index.html', {})
 
 def info_product(request):
     """ Return the information about the selected product. """
@@ -26,12 +27,13 @@ def info_product(request):
     if request.method == "POST":
         prod_id = request.POST.get('prod_id', None)
         get_prod_module = GetProductModule()
-        product = get_prod_module.find_a_product_by_id(prod_id)[0]
+        product = get_prod_module.find_a_product_by_id(prod_id)
         context = {'product': product}
         return render(request, 'products/product_info.html', context)
     else :
         return render(request, 'search/search.html', {})
 
+@login_required
 def save_favorite(request):
     if request.method == "POST":
         saver = SaveFavoriteProductModule()
@@ -43,6 +45,7 @@ def save_favorite(request):
     else:
         return render(request, 'search/search.html', {})
 
+@login_required
 def show_favorite(request):
     data_handler = GetAllFavoriteModule()
     user_id = request.user.id

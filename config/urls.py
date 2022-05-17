@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from purbeurre.home.views import HomeView
-from purbeurre.accounts.views import login_user, register_user, profile
+from purbeurre.accounts.views import login_user, logout_user, register_user, profile
 from purbeurre.products.views import info_product, search_product, save_favorite
 from purbeurre.products.views import show_favorite
 
@@ -32,4 +32,5 @@ urlpatterns = [
     path('save/',save_favorite, name='savefavorite'),
     path('favorites/', show_favorite, name='displayfavorite'),
     path('login/', login_user, name='login'),
+    path('logout/', logout_user, name='logout'),
 ]
