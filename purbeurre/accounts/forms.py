@@ -63,7 +63,7 @@ class CustomUserCreationForm(forms.UserCreationForm):
                                         "class" : "form-control",
                                         "placeholder": "Mot de Passe",
                                         }),
-        help_text=password_validation.password_validators_help_text_html(),
+        help_text="",
     )
     password2 = test_form.CharField(
         label=_("Confirmation du Mot de Passe"),
@@ -73,7 +73,7 @@ class CustomUserCreationForm(forms.UserCreationForm):
                                         "placehoder" : "Confirmez le Mot de Passe",
                                         }),
         strip=False,
-        help_text=_("Enter the same password as before, for verification."),
+        help_text="",
     )
 
     class Meta(forms.UserChangeForm.Meta):

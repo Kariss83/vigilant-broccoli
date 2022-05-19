@@ -45,7 +45,7 @@ def create_a_favorite(user, searched_prod, replacement_prod):
     return favorite
 
 
-class TestAccountssViewsModule(TestCase):
+class TestAccountsViewsModule(TestCase):
     """ Main class testing all the actions the parser is supposed to be able to 
     achieve.
     """
