@@ -11512,15 +11512,6 @@ nav.navbar-shrink svg{
   }
 }
 
-header.masthead_search {
-  padding-top: 10rem;
-  padding-bottom: calc(10rem - 4.5rem);
-  background: black;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: scroll;
-}
-
 #searched_product_name{
   background-color: var(--bs-light);
 }

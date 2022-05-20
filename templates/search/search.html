@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block topcontent %}
-<header class="masthead_search">
+<header class="masthead">
     <div class="container px-4 px-lg-5 h-100">
         <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
             {% if messages %}
@@ -41,7 +41,7 @@
                     <div class="feature-box-1 ">
                         <div class="rounded mx-auto d-block text-center" id="product_picture">
                             <button type="button" class="btn btn-light btn-circle btn-sm" id="nutriscore">
-                                <p class="text-uppercase"></p>{{prod.nutriscore}}
+                                <p class="text-uppercase">{{prod.nutriscore}}</p>
                             </button>
                             <img src="{{prod.image}}" alt="Image du produit" class="rounded img-fluid">
                         </div>
@@ -69,7 +69,7 @@
                                             {% csrf_token %}
                                             <input type="hidden" name="searched_prod_id" value="{{ searched_prod.id }}">
                                             <input type="hidden" name="favprod" value="{{ prod.id }}">
-                                            <button class="btn btn-outline-dark btn-block" type="submit">
+                                            <button id="save_button" class="btn btn-outline-dark btn-block" type="submit">
                                                 <i class="bi bi-save2"> Sauvegarder</i>
                                             </button>
                                         </form>

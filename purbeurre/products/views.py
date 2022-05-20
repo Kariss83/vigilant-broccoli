@@ -1,5 +1,5 @@
 # Create your views here.
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
 from purbeurre.products.controllers.find_substitute import SearchModule
@@ -41,7 +41,7 @@ def save_favorite(request):
         substitut_id = request.POST.get('favprod', None)
         searched_id = request.POST.get('searched_prod_id', None)
         saver.save_favorite_product(user_id, searched_id, substitut_id)
-        return render(request, 'products/my_products.html', {})
+        return redirect('/favorites/')
     else:
         return render(request, 'search/search.html', {})
 
