@@ -1,3 +1,4 @@
+import random
 from django.test import TestCase, Client
 
 from selenium import webdriver
@@ -5,21 +6,57 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver import FirefoxOptions
 
 from purbeurre.accounts.models import CustomUser
+from purbeurre.products.models import Products, Categories, Favorites
 
 opts = FirefoxOptions()
 opts.add_argument("--headless")
 
+def create_an_user(number):
+    user_test = CustomUser.objects.create(
+            email = f"test{number}@gmail.com",
+            name = f"MRTest{number}"
+        )
+    return user_test
+
+def create_a_category(name):
+    category = Categories.objects.create(name=name)
+    return category
+
+def create_a_product(number, nutri, category):
+    prod = Products.objects.create(
+            name = f"test{number}", 
+            url = f"http://test{number}.com",
+            image = f"http://test{number}_image.com",
+            nutriscore = nutri,
+            energy = 10,
+            fat = 10,
+            saturated_fat = 10,
+            sugar = 10,
+            salt = 10,
+            category = category
+            )
+    return prod
+
+def create_a_favorite(user, searched_prod, replacement_prod):
+    favorite = Favorites.objects.create(
+            searched_product = searched_prod,
+            substitution_product = replacement_prod, 
+            user = user
+            )
+    return favorite
 
 class UserLoginTest(TestCase):  
 
     @classmethod
     def setUpTestData(cls):
-        cls.user = CustomUser.objects.create(
-            email = "test_test@gmail.com",
-            name = "MRTest"
-        )
+        cls.user = create_an_user(1)
         cls.user.set_password('monsupermotdepasse')
         cls.user.save()
+        cls.cat = create_a_category("Test")
+        for i in range(10):
+            create_a_product(i, random.choice(["a","b","c","d","e"]), cls.cat)
+        cls.prod1, cls.prod2 = Products.objects.all()[:2]
+        cls.fav1 = create_a_favorite(cls.user, cls.prod1, cls.prod2)
 
         cls.client = Client()
 

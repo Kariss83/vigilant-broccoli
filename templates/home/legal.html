@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block topcontent %}
+<header class="masthead">
+    <div class="container px-4 px-lg-5 h-100">
+        <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+            <div class="col-lg-8 align-self-end text-white-75">
+                {% block h1topcontent %}
+                <h1>Mentions Légales:</h1>
+                {% endblock h1topcontent %}
+            </div>
+            <div class="col-lg-8 align-self-baseline text-white-75">
+                {% block h2topcontent %}
+                <h2>Hébergeur :</h2>
+                <h4>HEROKU Inc. – 650 7th Street San Francisco, CA USA.</h3>
+                <br>
+                <h2>Ressources utilisées :</h2>
+                <ul>
+                    <li>Template de site : Creative de startboostrap.com.</li>
+                    <li>Image de fond : Photo de Kawin Harasai (@Kawin) sur unsplash.com.</li>
+                    <li>Icone de carotte (mes favoris) : Icone de Fabien Jouin sur thenounproject.com.</li>
+                    <li>Autres icones : Boostrap Icons.</li>
+
+
+                </ul>
+                {% endblock h2topcontent %}
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock topcontent %}

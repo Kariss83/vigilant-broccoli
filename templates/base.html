@@ -16,6 +16,9 @@
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+        <!-- Project fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Scope+One" rel="stylesheet" type="text/css">
         <!-- SimpleLightbox plugin CSS-->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -92,7 +95,7 @@
                         </li>
                         {% if user.is_authenticated %}
                             <li class="nav-item nav-last-item">
-                                <a class="nav-link" href="logout/"><i class="bi bi-box-arrow-right"></i></a>
+                                <a class="nav-link" href="/logout/"><i class="bi bi-box-arrow-right"></i></a>
                             </li>
                         {% else %}
                             <li class="nav-item nav-last-item">
@@ -120,10 +123,10 @@
             <div class="container px-4 px-lg-5">
                 <div class="row">
                     <div class="col-md-6 text-center text-muted small">
-                        Mentions Légales
+                        <a class="nav-link text-muted" href="/legal/">Mentions Légales</a>
                     </div>
-                    <div class="col-md-6 ">
-                        <a class="nav-link text-center text-muted small" href="/#contact">Contact</a>
+                    <div class="col-md-6 text-center text-muted small">
+                        <a class="nav-link text-muted" href="/#contact">Contact</a>
                     </div>
                     <div class="small text-center text-muted">Copyright &copy; 2022 - Pur Beurre</div>
                 </div>

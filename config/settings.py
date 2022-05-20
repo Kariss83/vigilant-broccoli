@@ -87,7 +87,18 @@ DATABASES = {
         'PASSWORD': os.environ['DB_PWD'],
         'HOST': '127.0.0.1',
         'PORT': '5432',
-    }
+        'TEST': {
+                'MIRROR': 'test'
+            }
+    },
+    'test': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'purbeurre_test',
+        'USER': os.environ['DB_USER'],
+        'PASSWORD': os.environ['DB_PWD'],
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    },
 }
 
 
