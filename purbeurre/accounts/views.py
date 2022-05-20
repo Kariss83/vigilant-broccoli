@@ -1,33 +1,37 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages 
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 
-from purbeurre.accounts.forms import CustomUserCreationForm
+from purbeurre.accounts.forms import CustomUserCreationForm, CustomAuthenticationForm
 
 
 # Create your views here.
 
 # login view
 def login_user(request):
+	# import pdb; pdb.set_trace()
 	if request.method == 'POST':
-		form = AuthenticationForm(request.POST)
+		# import pdb; pdb.set_trace()
+		form = CustomAuthenticationForm(request.POST)
 		if form.is_valid():
-			email = request.POST['email']
-			password = request.POST['password']
+			email = request.POST.get('username','')
+			password = request.POST.get('password', '')
 			user = authenticate(request, email=email, password=password)
 			if user is not None:
 				login(request, user)
 				messages.success(request, ('Vous êtes connecté(e)!'))
 				return redirect('/')
-
-			else:
-				messages.success(request, (
-					'Erreur de connexion - Veuillez reéssayer...'))
-				return redirect('/login')
+		else:
+			messages.error(request, (
+				'Erreur de connexion - Veuillez reéssayer...'))
+			return redirect('/login')
 	else:
-		return render(request, 'accounts/login.html', {})
+		return render(
+			request,
+			'registration/login.html',
+			{'form': CustomAuthenticationForm()}
+			)
 
 # logout view
 @login_required
@@ -45,16 +49,23 @@ def register_user(request):
 			password = form.cleaned_data['password1']
 			form.save()
 			user = authenticate(email=email, password=password)
-			print(user)
+			# import pdb; pdb.set_trace()
 			if user is not None:
 				login(request, user)
 				messages.success(request, ('Vous êtes enregistré(e)...'))
 				return redirect('/')
+		else:
+			messages.error(request, (
+				'Erreur de Création de Comptes - Veuillez reéssayer...'))
+			return redirect('/register')
 	else:
 		form = CustomUserCreationForm()
-	
-	context = {'form': form}
-	return render(request, 'registration/register.html', context)
+		context = {'form': form}
+		return render(
+			request,
+			'registration/register.html',
+			context
+			)
 
 # profile view
 @login_required

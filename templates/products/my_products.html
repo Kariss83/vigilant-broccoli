@@ -1,10 +1,34 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block h1topcontent %}
-    <h1>Cette page affiche les produits que vous avez sauvegardés</h1>
-    {% for prod in favorites %}
-        <ul>
-            <li>{{ prod.searched_product }}</li>
-        </ul>
-    {% endfor %}
-{% endblock h1topcontent %}
+
+{% block topcontent %}
+<header class="masthead">
+    <div class="container px-4 px-lg-5 h-100">
+        <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>	
+                {% endfor %}
+            {% endif %}
+            <div class="col-lg-8 align-self-end text-white">
+                {% block h1topcontent %}
+                <h1 style="color:rgba(255, 255, 255, 0.7)">Cette page affiche les produits que vous avez sauvegardés :</h1>
+                {% for prod in favorites %}
+                    <ul>
+                        <li>
+                            <a href="{{ prod.searched_product.url }}">{{ prod.searched_product }}</a>
+                        </li>
+                    </ul>
+                {% endfor %}
+                {% endblock h1topcontent %}
+            </div>
+            <div class="col-lg-8 align-self-baseline">
+                {% block h2topcontent %}{% endblock h2topcontent %}
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock topcontent %}

@@ -14,8 +14,7 @@ class SaveFavoriteProductModule():
                 user= user
                 )
         except Exception :
-            message = "Impossible de sauvegarder le produit, "
-            "veuillez rééssayer."
+            message = "Impossible de sauvegarder le produit."
             return message
 
 class GetAllFavoriteModule():
@@ -24,7 +23,6 @@ class GetAllFavoriteModule():
         try :
             user = CustomUser.objects.filter(id=user_id)[0]
             favorites = Favorites.objects.filter(user=user)
-            print(favorites)
             return favorites
         except Exception : 
             message = "Impossible de retourner vos favoris, veuillez rééssayer."

@@ -1,7 +1,8 @@
 from purbeurre.products.models import  Products
 
 class SearchModule():
-    def find_all_possible_substitute(self, product):
+    @staticmethod
+    def find_all_possible_substitute(product):
         try :
             searched_product = Products.objects.filter(name__icontains=product)[0]
             substit_list = Products.objects.filter(category_id=searched_product.category_id).order_by('nutriscore')[:6]

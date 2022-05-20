@@ -11512,3 +11512,23 @@ nav.navbar-shrink svg{
   }
 }
 
+#searched_product_name{
+  background-color: var(--bs-light);
+}
+
+.btn-circle.btn-sm {
+  width: 35px;
+  height: 35px;
+  padding: 6px 0px;
+  border-radius: 21px;
+  font-size: 14px;
+  text-align: center;
+}
+
+button.btn-circle.btn-sm{
+  position:absolute;
+}
+
+#product_presentation{
+  color: lightgray;
+}

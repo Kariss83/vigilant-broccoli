@@ -6,8 +6,11 @@ name = "pypi"
 [packages]
 django = "*"
 requests = "*"
+coverage = "*"
 
 [dev-packages]
+pytest = "*"
+selenium = "*"
 
 [requires]
 python_version = "3.9"

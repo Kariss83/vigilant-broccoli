@@ -1,38 +1,46 @@
 {% extends 'base.html' %}
 
-{% block h1topcontent %}
-<h2 class="text-center text-white-75 mb-5">Login</h2>
-{% endblock h1topcontent %}
-
-{% block h2topcontent %}
-<div class="col-md-6 offset-md-3">
-	<form method="POST" action="{% url 'home' %}">
-		{% csrf_token %}
-
-		{{ form.as_p }}
-		{% comment %} <div class="form-group">
-			<p>	
-			<input type="text" class="form-control"  placeholder="Email" name="email">
-			</p>
-		</div>
-		<div class="form-group">
-			<p>
-			<input type="password" class="form-control"  placeholder="Mot de Passe" name="password">
-			</p>
-		</div> {% endcomment %}
-		<p>
-			<button type="submit" class="btn btn-secondary">Login</button>
-		</p>
-	
-		<div>
-			<p>
-			<a href="/register">Créer un compte</a>
-			</p>
-		</div>
-	</form>
-</div>
-{% endblock h2topcontent %}
-
+{% block topcontent %}
+<header class="masthead">
+    <div class="container px-4 px-lg-5 h-100">
+        <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>	
+                {% endfor %}
+            {% endif %}
+            <div class="col-lg-8 align-self-end">
+                {% block h1topcontent %}
+				<h2 class="text-center text-white-75 mb-5">Login</h2>
+				{% endblock h1topcontent %}
+            </div>
+            <div class="col-lg-8 align-self-baseline">
+                {% block h2topcontent %}
+				<div class="col-md-6 offset-md-3">
+					<form method=POST action="{% url 'login' %}">
+						{% csrf_token %}
+				
+						{{ form.as_p }}
+						<p>
+							<button type="submit" class="btn btn-secondary">Login</button>
+						</p>
+					
+						<div>
+							<p>
+							<a href="/register">Créer un compte</a>
+							</p>
+						</div>
+					</form>
+				</div>
+				{% endblock h2topcontent %}
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock topcontent %}
 
 
 
