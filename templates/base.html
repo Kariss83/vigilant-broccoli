@@ -36,8 +36,9 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto my-2 my-lg-0">
                         <li class="nav-item nav-search_item">
-                            <form class="form-inline my-2 my-lg-0">
-                                <input class="form-control mr-sm-2" type="search" placeholder="Chercher" aria-label="Chercher">
+                            <form class="form-inline my-2 my-lg-0" method=POST action="{% url 'search' %}">
+                                {% csrf_token %}
+                                <input class="form-control mr-sm-2" type="search" placeholder="Chercher" aria-label="Chercher" name='searched'>
                             </form>
                         </li>
                         {% if user.is_authenticated %}
