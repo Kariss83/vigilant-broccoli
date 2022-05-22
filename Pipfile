@@ -9,6 +9,7 @@ requests = "*"
 coverage = "*"
 gunicorn = "*"
 psycopg2 = "*"
+whitenoise = "*"
 
 [dev-packages]
 pytest = "*"
