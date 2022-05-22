@@ -70,7 +70,7 @@ class DBpopulator(BaseCommand):
             try:
                 nutriscore = rec['nutriscore_grade']
             except KeyError:
-                pass
+                nutriscore = ""
             energy = rec.get('nutriments', {}).get('energy-kcal_100g', 0)
             fat = rec.get('nutriments', {}).get('fat_100g', 0)
             saturated_fat = rec.get('nutriments', {}).get('saturated-fat_100g', 0)
