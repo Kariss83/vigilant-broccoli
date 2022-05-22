@@ -21,6 +21,8 @@ from purbeurre.accounts.views import login_user, logout_user, register_user, pro
 from purbeurre.products.views import info_product, search_product, save_favorite
 from purbeurre.products.views import show_favorite
 
+app_name = 'config'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomeView.as_view(), name='home'),
