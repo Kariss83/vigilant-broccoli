@@ -36,7 +36,7 @@ Prerequisites : you need to have installed git, pipenv and postgresql on your ma
     ```
     - make it executable using : `chmod +x coverage.sh`
     - run the command : `./coverage.sh`
-3. 
+
 
 
 
