@@ -22,6 +22,12 @@ def login_user(request):
 				login(request, user)
 				messages.success(request, ('Vous êtes connecté(e)!'))
 				return redirect('/')
+			else:
+				messages.error(
+					request,
+					('Erreur de connexion - Veuillez reéssayer...')
+					)
+				return redirect('/login')
 		else:
 			messages.error(request, (
 				'Erreur de connexion - Veuillez reéssayer...'))

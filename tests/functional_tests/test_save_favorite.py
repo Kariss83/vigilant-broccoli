@@ -16,14 +16,12 @@ opts.add_argument("--headless")
 def scroll_shim(passed_in_driver, object):
         x = object.location['x']
         y = object.location['y']
-        scroll_by_coord = 'window.scrollTo(%s,%s);' % (
-            x,
-            y
-        )
-        scroll_nav_out_of_way = 'window.scrollBy(0, -120);'
+        scroll_by_coord = f'window.scrollTo({x},{y});'
+        scroll_nav_out_of_way = 'window.scrollBy(0, -10);'
         passed_in_driver.execute_script(scroll_by_coord)
         passed_in_driver.execute_script(scroll_nav_out_of_way)
-        sleep(4)
+        WebDriverWait(passed_in_driver, 20).until(EC.element_to_be_clickable((By.ID, "save_button")))
+        # sleep(4)
 
 class FavoritesTest(TestCase):  
 
@@ -62,7 +60,7 @@ class FavoritesTest(TestCase):
         scroll_shim(self.browser, elements[0])
         
         actions = ActionChains(self.browser)
-        actions.move_to_element(elements[0])
+        # actions.move_to_element(elements[0])
         actions.click()
         actions.perform()
 
