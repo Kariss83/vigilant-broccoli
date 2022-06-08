@@ -19,12 +19,12 @@ Prerequisites : you need to have installed git, pipenv and postgresql on your ma
     - DB_PWD='users_db_pwd'
     - DJANGO_KEY='your_secret_django_key'
 5. Set the virtual environment by running : `pipenv shell`
-6. Start the server using `python manage.py runserver` ou `python3 manage.py runserver`
-    - (optionnal) If you try to launch the app for the first time you'll need to populate the DB by running `python manage.py populatedb` ou `python3 manage.py populatedb` (this operation might take some time, please wait for the success message to pop).
+6. Start the server using `python manage.py runserver` ou `python3 manage.py runserver` on Unix machines and `py manage.py runserver` on Windows machines.
+    - (optionnal) If you try to launch the app for the first time you'll need to populate the DB by running `python manage.py populatedb` ou `python3 manage.py populatedb` on Unix machines and `py manage.py populatedb` on Windows machines (this operation might take some time, please wait for the success message to pop).
 7. You can now go to the page http://127.0.0.1:8000 and have fun on your PurBeurre app.
 
 ## How to launch tests
-1. If you want to just run the tests after you've initiated your virtual environment, you can run : `python manage.py test`
+1. If you want to just run the tests after you've initiated your virtual environment, you can run : `python manage.py test` on Unix machines and `py manage.py test` on Windows machines.
 2. If you want something with a bit more verbosity and to check coverage.
     - you can create a file called 'coverage.sh' at the root of the project that contains the following:
     ```
@@ -47,9 +47,6 @@ Prerequisites : you need to have installed git, pipenv and postgresql on your ma
     max-line-length = 119
     ```
 2. For a nicer visual representation of that info you can run `flake8 --format=html --outputdir=flake-report` and open the html file that's in the flake-report directory.
-
-
-
 
 ## Technologies
 - Python --> Django
