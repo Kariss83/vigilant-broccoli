@@ -17,6 +17,7 @@ Prerequisites : you need to have installed git, pipenv and postgresql on your ma
 4. Set up your environnement variables in a .env file at the root of your project.
     - DB_USER='your_db_user'
     - DB_PWD='users_db_pwd'
+    - DJANGO_KEY='your_secret_django_key'
 5. Set the virtual environment by running : `pipenv shell`
 6. Start the server using `python manage.py runserver` ou `python3 manage.py runserver`
     - (optionnal) If you try to launch the app for the first time you'll need to populate the DB by running `python manage.py populatedb` ou `python3 manage.py populatedb` (this operation might take some time, please wait for the success message to pop).
