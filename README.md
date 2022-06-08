@@ -37,6 +37,10 @@ Prerequisites : you need to have installed git, pipenv and postgresql on your ma
     - make it executable using : `chmod +x coverage.sh`
     - run the command : `./coverage.sh`
 
+## Linting with flake8
+1. If you want to check code linting on your project you can run `flake8`
+2. For a nicer visual representation of that info you can run `flake8 --format=dashboard --outputdir=flake-report --title="My dashboard"` and open the html file that's in the flake-report directory.
+
 
 
 

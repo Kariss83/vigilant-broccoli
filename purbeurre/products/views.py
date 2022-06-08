@@ -17,12 +17,13 @@ def search_product(request):
         context = {'searched_prod': substit[0],
                    'substitut_prods': substit[1]}
         return render(request, 'search/search.html', context)
-    else :
+    else:
         return render(request, 'home/index.html', {})
+
 
 def info_product(request):
     """ Return the information about the selected product. """
-    #import pdb; pdb.set_trace()
+    # import pdb; pdb.set_trace()
 
     if request.method == "POST":
         prod_id = request.POST.get('prod_id', None)
@@ -30,8 +31,9 @@ def info_product(request):
         product = get_prod_module.find_a_product_by_id(prod_id)
         context = {'product': product}
         return render(request, 'products/product_info.html', context)
-    else :
+    else:
         return render(request, 'search/search.html', {})
+
 
 @login_required
 def save_favorite(request):
@@ -44,6 +46,7 @@ def save_favorite(request):
         return redirect('/favorites/')
     else:
         return render(request, 'search/search.html', {})
+
 
 @login_required
 def show_favorite(request):

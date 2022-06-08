@@ -1,4 +1,4 @@
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 
 import requests
 # from django.core.exceptions import ObjectDoesNotExist
@@ -9,6 +9,8 @@ from purbeurre.products.models import Categories, Products
 ####################################################################
 """   SCRIPT TO INITIALIZE THE DB THROUGH OPEN FOOD FACTS' API   """
 ####################################################################
+
+
 class DBpopulator(BaseCommand):
     def __init__(self):
         #  stores api answers
@@ -38,15 +40,14 @@ class DBpopulator(BaseCommand):
             'tagtype_1': 'countries',
             'tag_contains_1': 'contains',
             'tag_1': 'france',
-            'fields' : 'product_name_fr,url,image_url,nutriscore_grade,'
-                    'nutriments',
+            'fields': 'product_name_fr,url,image_url,nutriscore_grade,'
+                      'nutriments',
             }
 
     def request(self):
         """This method will reqquest the API on specific criteria"""
         self.response = requests.get(self.urlapi, params=self.criteria)
 
-    
     def populate_products(self, category):
         """This method will populate the DB with data from the API"""
         self.json_response = self.response.json()['products']
@@ -79,19 +80,17 @@ class DBpopulator(BaseCommand):
             category = Categories.objects.get(name=category)
             # keeping only products for which we have nutrigrade info
             if nutriscore in ('a', 'b', 'c', 'd', 'e'):
-                Products.objects.create(name = name,
-                                        url = url,
-                                        image = image_url,
-                                        nutriscore = nutriscore,
-                                        energy = energy,
-                                        fat = fat,
-                                        saturated_fat = saturated_fat,
-                                        sugar = sugar,
-                                        salt = salt,
-                                        category = category)
+                Products.objects.create(name=name,
+                                        url=url,
+                                        image=image_url,
+                                        nutriscore=nutriscore,
+                                        energy=energy,
+                                        fat=fat,
+                                        saturated_fat=saturated_fat,
+                                        sugar=sugar,
+                                        salt=salt,
+                                        category=category)
 
-
-    
 
 if __name__ == '__main__':
 

@@ -1,6 +1,5 @@
 from django import forms as test_form
-from django.contrib.auth import forms, password_validation
-from django.core.exceptions import ValidationError
+from django.contrib.auth import forms
 from django.utils.translation import gettext_lazy as _
 
 from purbeurre.accounts.models import CustomUser
@@ -60,7 +59,7 @@ class CustomUserCreationForm(forms.UserCreationForm):
         strip=False,
         widget=test_form.PasswordInput(attrs={
                                         "autocomplete": "new-password",
-                                        "class" : "form-control",
+                                        "class": "form-control",
                                         "placeholder": "Mot de Passe",
                                         }),
         help_text="",
@@ -68,9 +67,9 @@ class CustomUserCreationForm(forms.UserCreationForm):
     password2 = test_form.CharField(
         label=_("Confirmation du Mot de Passe"),
         widget=test_form.PasswordInput(attrs={
-                                        "autocomplete" : "new-password",
-                                        "class" : "form-control",
-                                        "placehoder" : "Confirmez le Mot de Passe",
+                                        "autocomplete": "new-password",
+                                        "class": "form-control",
+                                        "placehoder": "Confirmez le Mot de Passe",
                                         }),
         strip=False,
         help_text="",

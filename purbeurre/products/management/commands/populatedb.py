@@ -2,9 +2,9 @@ from django.core.management.base import BaseCommand
 from purbeurre.products.dbpopulator import DBpopulator
 from purbeurre.products.constants import CATEGORIES
 
+
 class Command(BaseCommand):
     help = 'Populating the DB with the categories inside the CATEGORIES'
-
 
     def handle(self, *args, **options):
         """This method takes needed actions to create and populate the DB"""

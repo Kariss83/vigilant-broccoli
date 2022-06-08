@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
-from pathlib import Path
+# from pathlib import Path
 import os
 import dj_database_url
 
@@ -36,11 +36,11 @@ STATICFILES_DIRS = (
 SECRET_KEY = os.environ['DJANGO_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
-# DEBUG = False
+DEBUG = False
 
-ALLOWED_HOSTS = ['.herokuapp.com','127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -117,7 +117,7 @@ DATABASES = {
 }
 
 
-# DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 
 # Password validation
@@ -171,8 +171,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Handling redirection from decorator @loginrequired
-LOGIN_URL='/registration/login/'
-LOGIN_REDIRECT_URL='/registration/login/'
+LOGIN_URL = '/registration/login/'
+LOGIN_REDIRECT_URL = '/registration/login/'
 
 # Help for resolving tests errors on POST test on some views
 CACHES = {

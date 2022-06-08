@@ -48,7 +48,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     Username and password are required. Other fields are optional.
     """
     email = models.EmailField(
-        _("email address"), 
+        _("email address"),
         unique=True,
         error_messages={
             "unique": _("A user with that email already exists."),
@@ -81,7 +81,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def clean(self):
         super().clean()
         self.email = self.__class__.objects.normalize_email(self.email)
-    
+
     def get_short_name(self):
         """Return the short name for the user."""
         return self.name

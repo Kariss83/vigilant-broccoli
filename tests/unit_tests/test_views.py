@@ -5,55 +5,59 @@ import random
 from django.contrib import auth
 from django.test import TestCase, Client
 from django.urls import reverse
-from purbeurre.accounts.forms import CustomAuthenticationForm, CustomUserCreationForm
+from purbeurre.accounts.forms import CustomAuthenticationForm
 
 from purbeurre.accounts.models import CustomUser
-from purbeurre.products.models import  Categories, Favorites, Products
+from purbeurre.products.models import Categories, Favorites, Products
+
 
 def create_an_user(number):
     user_test = CustomUser.objects.create(
-            email = f"test{number}@gmail.com",
-            name = f"MRTest{number}"
+            email=f"test{number}@gmail.com",
+            name=f"MRTest{number}"
         )
     return user_test
+
 
 def create_a_category(name):
     category = Categories.objects.create(name=name)
     return category
 
+
 def create_a_product(number, nutri, category):
     prod = Products.objects.create(
-            name = f"test{number}", 
-            url = f"http://test{number}.com",
-            image = f"http://test{number}_image.com",
-            nutriscore = nutri,
-            energy = 10,
-            fat = 10,
-            saturated_fat = 10,
-            sugar = 10,
-            salt = 10,
-            category = category
+            name=f"test{number}",
+            url=f"http://test{number}.com",
+            image=f"http://test{number}_image.com",
+            nutriscore=nutri,
+            energy=10,
+            fat=10,
+            saturated_fat=10,
+            sugar=10,
+            salt=10,
+            category=category
             )
     return prod
 
+
 def create_a_favorite(user, searched_prod, replacement_prod):
     favorite = Favorites.objects.create(
-            searched_product = searched_prod,
-            substitution_product = replacement_prod, 
-            user = user
+            searched_product=searched_prod,
+            substitution_product=replacement_prod,
+            user=user
             )
     return favorite
 
 
 class TestAccountsViewsModule(TestCase):
-    """ Main class testing all the actions the parser is supposed to be able to 
+    """ Main class testing all the actions the parser is supposed to be able to
     achieve.
     """
     @classmethod
     def setUpTestData(cls):
         cls.user = CustomUser.objects.create(
-            email = "test@gmail.com",
-            name = "MRTest",
+            email="test@gmail.com",
+            name="MRTest",
         )
         cls.user.set_password('monsupermotdepasse')
         cls.user.save()
@@ -71,18 +75,17 @@ class TestAccountsViewsModule(TestCase):
 
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'registration/login.html')
-    
+
     # def test_login_user_POST_fails_if_no_mail_or_password(self):
     #     response = self.client.post(
     #         self.login_url,
     #         {'username': '', 'password': 'monsupermotdepasse'},
     #         follow=True
     #         )
-
     #     self.assertRaises(KeyError, self.client.session, '_auth_user_id')
     #     self.assertEquals(response.status_code, 302)
     #     self.assertTrue(response.url.startswith('/login'))
-    
+
     def test_login_user_POST(self):
         response = self.client.post(
             self.login_url,
@@ -98,12 +101,12 @@ class TestAccountsViewsModule(TestCase):
 
     def test_home_page_uses_item_form(self):
         response = self.client.post(self.login_url, follow=True)
-        
+
         self.assertIsInstance(
             response.context['form'],
             CustomAuthenticationForm
             )
-    
+
     def test_login_user_POST_invalid_form(self):
         form = CustomAuthenticationForm(
             data={
@@ -122,15 +125,15 @@ class TestAccountsViewsModule(TestCase):
 
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'registration/register.html')
-    
+
     def test_register_user_POST(self):
         response = self.client.post(
             self.register_url,
             {'email': 'test2@gmail.com',
-            'name': 'MRTest2',
-            'password1': 'monsupermotdepasse',
-            'password2': 'monsupermotdepasse'
-            },
+             'name': 'MRTest2',
+             'password1': 'monsupermotdepasse',
+             'password2': 'monsupermotdepasse'
+             },
             follow=True
             )
         new_user = CustomUser.objects.get(name='MRTest2')
@@ -138,15 +141,15 @@ class TestAccountsViewsModule(TestCase):
             int(self.client.session['_auth_user_id']),
             new_user.id
             )
-        self.assertEquals(response.status_code, 200) # why no redirection ?
+        self.assertEquals(response.status_code, 200)  # why no redirection ?
         self.assertTemplateUsed(response, 'home/index.html')
 
     def test_register_user_POST_invalid_form(self):
         response = self.client.post(
             self.register_url,
             {'email': 'test2@gmail.com',
-            'password1': 'monsupermotdepasse',
-            },
+             'password1': 'monsupermotdepasse',
+             },
             follow=True
             )
         # self.assertEquals(response.status_code, 200) # why no redirection ?
@@ -156,7 +159,7 @@ class TestAccountsViewsModule(TestCase):
             str(messages[0]),
             'Erreur de Création de Comptes - Veuillez reéssayer...')
         self.assertEquals(response.status_code, 200)
-        self.assertTemplateUsed(response, 'registration/register.html') #again, no context in client
+        self.assertTemplateUsed(response, 'registration/register.html')
 
     def test_logout_user_GET(self):
         self.client.login(
@@ -174,9 +177,9 @@ class TestAccountsViewsModule(TestCase):
         self.assertEqual(str(messages[0]), 'Vous êtes déconnecté(e)...')
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'home/index.html')
-    
+
     def test_profile_user_logged_in_GET(self):
-        login = self.client.login(
+        self.client.login(
             email='test@gmail.com',
             password='monsupermotdepasse'
             )
@@ -185,16 +188,16 @@ class TestAccountsViewsModule(TestCase):
 
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'accounts/profile.html')
-    
+
     def test_profile_GET_while_not_logged_in(self):
         response = self.client.get(self.profile_url)
 
         self.assertEquals(response.status_code, 302)
-        self.assertTrue(response.url.startswith('/registration/login/'))   
-    
+        self.assertTrue(response.url.startswith('/registration/login/'))
+
 
 class TestProductsViewsModule(TestCase):
-    """ Main class testing all the actions the parser is supposed to be able to 
+    """ Main class testing all the actions the parser is supposed to be able to
     achieve.
     """
     @classmethod
@@ -204,7 +207,9 @@ class TestProductsViewsModule(TestCase):
         cls.user.save()
         cls.cat = create_a_category("Test")
         for i in range(10):
-            create_a_product(i, random.choice(["a","b","c","d","e"]), cls.cat)
+            create_a_product(i,
+                             random.choice(["a", "b", "c", "d", "e"]),
+                             cls.cat)
         cls.prod1, cls.prod2 = Products.objects.all()[:2]
         cls.fav1 = create_a_favorite(cls.user, cls.prod1, cls.prod2)
 
@@ -241,7 +246,7 @@ class TestProductsViewsModule(TestCase):
 
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'search/search.html')
-    
+
     def test_info_product_POST(self):
         searched_prod = Products.objects.all()[0]
         response = self.client.post(
@@ -256,7 +261,7 @@ class TestProductsViewsModule(TestCase):
         self.assertEqual(response.context['product'], searched_prod)
 
     def test_save_favorite_GET(self):
-        login = self.client.login(
+        self.client.login(
             email='test1@gmail.com',
             password='monsupermotdepasse'
             )
@@ -266,7 +271,7 @@ class TestProductsViewsModule(TestCase):
         self.assertTemplateUsed(response, 'search/search.html')
 
     def test_save_favorite_POST(self):
-        login = self.client.login(
+        self.client.login(
             email='test1@gmail.com',
             password='monsupermotdepasse'
             )
@@ -274,9 +279,9 @@ class TestProductsViewsModule(TestCase):
         saved_prod = Products.objects.all()[5]
         response = self.client.post(
             self.savefavorite_url,
-            {'favprod' : saved_prod.id,
-            'searched_prod_id': searched_prod.id,
-            },
+            {'favprod': saved_prod.id,
+             'searched_prod_id': searched_prod.id,
+             },
             follow=True
             )
 
@@ -284,9 +289,9 @@ class TestProductsViewsModule(TestCase):
         self.assertTemplateUsed(response, 'products/my_products.html')
 
         self.assertEqual(len(Favorites.objects.all()), 2)
-    
+
     def test_show_favorite_GET(self):
-        login = self.client.login(
+        self.client.login(
             email='test1@gmail.com',
             password='monsupermotdepasse'
             )
