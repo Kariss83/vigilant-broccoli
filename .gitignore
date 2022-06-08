@@ -141,3 +141,6 @@ notes.txt
 
 # Flake 8 reports #
 flake-report/
+
+# Flake 8 settings #
+setup.cfg

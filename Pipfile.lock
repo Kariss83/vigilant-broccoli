@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "31d7c6877dc52ef85ef8849b440125aa8d99a7f6e91d9c7dd91dd2ed2681e5c0"
+            "sha256": "77fbc4ff6c4a56951ca10ecfdd1e60cda6d9d4adc87f995ea1bcfb80b6184962"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -156,6 +156,14 @@
             ],
             "index": "pypi",
             "version": "==0.1.4"
+        },
+        "flake8-html": {
+            "hashes": [
+                "sha256:5db0439169987509690ef8c90efb00346009bcc5cffb8b94fe0ad30cd655b88c",
+                "sha256:6d3f2cbae8a0092d922ca5acf88f971d85a2bd69723d0dceba65e57bcaa0adba"
+            ],
+            "index": "pypi",
+            "version": "==0.4.2"
         },
         "gunicorn": {
             "hashes": [
@@ -418,6 +426,14 @@
             ],
             "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
             "version": "==2.4.0"
+        },
+        "pygments": {
+            "hashes": [
+                "sha256:5eb116118f9612ff1ee89ac96437bb6b49e8f04d8a13b514ba26f620208e26eb",
+                "sha256:dc9c10fb40944260f6ed4c688ece0cd2048414940f1cea51b8b226318411c519"
+            ],
+            "markers": "python_version >= '3.6'",
+            "version": "==2.12.0"
         },
         "pyparsing": {
             "hashes": [

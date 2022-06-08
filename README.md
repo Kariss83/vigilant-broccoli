@@ -39,7 +39,14 @@ Prerequisites : you need to have installed git, pipenv and postgresql on your ma
 
 ## Linting with flake8
 1. If you want to check code linting on your project you can run `flake8`
-2. For a nicer visual representation of that info you can run `flake8 --format=dashboard --outputdir=flake-report --title="My dashboard"` and open the html file that's in the flake-report directory.
+    - (optionnal) You can set up flake8 by creating a setup.cfg file with the following content :
+    ```
+    [flake8]
+    exclude = purbeurre/accounts/migrations,purbeurre/home/migrations,purbeurre/products/migrations
+    max-complexity = 10
+    max-line-length = 119
+    ```
+2. For a nicer visual representation of that info you can run `flake8 --format=html --outputdir=flake-report` and open the html file that's in the flake-report directory.
 
 
 
