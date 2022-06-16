@@ -144,3 +144,8 @@ flake-report/
 
 # Flake 8 settings #
 setup.cfg
+
+# Multiple environment
+config/settings/production.py
+__pycache__
+staticfiles/
