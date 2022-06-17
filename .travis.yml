@@ -9,11 +9,12 @@ branches:
 
 before_script:
   - pipenv install
+  - sudo pg_ctlcluster 14 main start
   - chmod +x ./coverage.sh
   - python manage.py runserver &
 
 addons:
-  postgresql: "11.3"
+  postgresql: "14.3"
 
 services:
   - postgresql
