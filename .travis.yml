@@ -8,7 +8,7 @@ branches:
     - staging
 
 before_script:
-  - pg_ctlcluster 13 main start
+  - sudo systemctl start postgresql@13-main
   - chmod +x ./coverage.sh
   - python manage.py runserver &
 
