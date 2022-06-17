@@ -7,6 +7,14 @@ branches:
   only:
     - staging
 
+before_install:
+  - sudo apt-get update
+  - sudo apt-get --yes remove postgresql\*
+  - sudo apt-get install -y postgresql-13 postgresql-client-13
+  - sudo sed -i 's/port = 5433/port = 5432/' /etc/postgresql/13/main/postgresql.conf
+  - sudo cp /etc/postgresql/{9.6,13}/main/pg_hba.conf
+  - sudo service postgresql restart 13
+
 before_script:
   - sudo systemctl start postgresql@13-main
   - pg_lsclusters
