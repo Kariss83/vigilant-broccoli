@@ -13,6 +13,10 @@ before_script:
 
 addons:
   postgresql: "14.3"
+  apt:
+        packages:
+        - postgresql-14
+        - postgresql-client-14
 
 services:
   - postgresql
