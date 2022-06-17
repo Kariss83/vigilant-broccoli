@@ -8,12 +8,11 @@ branches:
     - staging
 
 before_script:
-  - pipenv install
   - chmod +x ./coverage.sh
   - python manage.py runserver &
 
-services:
-  - postgresql
+addons:
+  postgresql: "11.3"
 
 env: 
   global:
