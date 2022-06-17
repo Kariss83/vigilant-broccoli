@@ -9,9 +9,9 @@ branches:
 
 before_script:
   - sudo systemctl start postgresql@13-main
-  - sudo pg_lsclusters
+  - pg_lsclusters
+  - python manage.py runserver
   - chmod +x ./coverage.sh
-  - python manage.py runserver &
 
 addons:
   addons:
