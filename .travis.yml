@@ -25,7 +25,7 @@ services:
 
 env: 
   global:
-    - PGPORT=5433
+    - PGPORT=5432
     - DJANGO_SETTINGS_MODULE=config.settings.travis
     - DJANGO_KEY=django-insecure-be12llf1uqajc#jnp5$1@lyaf=$-8yyavk!twj%f9u4#+a^6-
     - DB_USER=travis
