@@ -8,8 +8,6 @@ branches:
     - staging
 
 before_script:
-  - pipenv install
-  - sudo pg_ctlcluster 14 main start
   - chmod +x ./coverage.sh
   - python manage.py runserver &
 
