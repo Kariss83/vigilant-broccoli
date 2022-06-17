@@ -16,12 +16,13 @@ services:
   - postgresql
 
 env: 
-  - DJANGO_SETTINGS_MODULE=config.settings.travis
-  - DJANGO_KEY=django-insecure-be12llf1uqajc#jnp5$1@lyaf=$-8yyavk!twj%f9u4#+a)^6-
-  - DB_USER=postgres
-  - DB_PWD=
-  - DB_NAME=
-  - DB_TEST=
+  global:
+    - DJANGO_SETTINGS_MODULE=config.settings.travis
+    - DJANGO_KEY=django-insecure-be12llf1uqajc#jnp5$1@lyaf=$-8yyavk!twj%f9u4#+a)^6-
+    - DB_USER=postgres
+    - DB_PWD=
+    - DB_NAME=
+    - DB_TEST=
 
 script:
   - ./coverage.sh
