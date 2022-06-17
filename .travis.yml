@@ -8,16 +8,17 @@ branches:
     - staging
 
 before_script:
+  - pg_ctlcluster 13 main start
   - chmod +x ./coverage.sh
   - python manage.py runserver &
 
 addons:
   addons:
-  postgresql: "11"
+  postgresql: "13"
   apt:
     packages:
-    - postgresql-11
-    - postgresql-client-11
+    - postgresql-13
+    - postgresql-client-13
 
 services:
   - postgresql
