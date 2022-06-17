@@ -1,0 +1,20 @@
+language: python
+python:
+  - '3.9.12'
+
+# safelist
+branches:
+  only:
+    - staging
+
+before_script:
+  - pipenv install
+  - python manage.py runserver &
+
+services:
+  - postgresql
+
+env: DJANGO_SETTINGS_MODULE="config.settings.travis"
+
+script:
+  - ./coverage.sh
