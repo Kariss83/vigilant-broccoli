@@ -12,20 +12,22 @@ before_script:
   - python manage.py runserver &
 
 addons:
-  postgresql: "14.3"
+  addons:
+  postgresql: "11"
   apt:
-        packages:
-        - postgresql-14
-        - postgresql-client-14
+    packages:
+    - postgresql-11
+    - postgresql-client-11
 
 services:
   - postgresql
 
 env: 
   global:
+    - PGPORT=5433
     - DJANGO_SETTINGS_MODULE=config.settings.travis
     - DJANGO_KEY=django-insecure-be12llf1uqajc#jnp5$1@lyaf=$-8yyavk!twj%f9u4#+a^6-
-    - DB_USER=postgres
+    - DB_USER=travis
     - DB_PWD=
     - DB_NAME=
     - DB_TEST=
