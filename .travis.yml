@@ -26,6 +26,7 @@ before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
   - sudo systemctl start postgresql@13-main
   - pg_lsclusters
+  - python manage.py migrate
   - python manage.py loaddata fixtures/dbdump.json
   - python manage.py runserver &
   - chmod +x ./coverage.sh
