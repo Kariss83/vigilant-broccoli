@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 
 from selenium import webdriver
-from selenium.webdriver import ChromeOptions
+from selenium.webdriver import FirefoxOptions
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -9,7 +9,8 @@ from selenium.webdriver.common.action_chains import ActionChains
 
 from purbeurre.accounts.models import CustomUser
 
-opts = ChromeOptions()
+
+opts = FirefoxOptions()
 opts.add_argument("--headless")
 
 
@@ -29,8 +30,8 @@ class FavoritesTest(TestCase):
     def setUpTestData(cls):
         CustomUser.objects.all().delete()
         cls.client = Client()
-        # cls.browser = webdriver.Firefox(options=opts)
-        cls.browser = webdriver.Chrome(options=opts)
+        cls.browser = webdriver.Firefox(options=opts)
+        # cls.browser = webdriver.Chrome(options=opts)
         cls.browser.set_window_size(2400, 1000)
 
     def test_can_save_favorite(self):

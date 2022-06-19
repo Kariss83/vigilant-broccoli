@@ -14,6 +14,7 @@ dj-database-url = "*"
 flake8 = "*"
 flake8-dashboard = "*"
 flake8-html = "*"
+selenium = "*"
 
 [dev-packages]
 pytest = "*"

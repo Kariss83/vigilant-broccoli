@@ -7,14 +7,54 @@ branches:
   only:
     - staging
 
+before_install:
+  - sudo apt-get update
+  - sudo apt-get --yes remove postgresql\*
+  - sudo apt-get install -y postgresql-13 postgresql-client-13
+  - sudo sed -i 's/port = 5433/port = 5432/' /etc/postgresql/13/main/postgresql.conf
+  - sudo cp /etc/postgresql/{9.6,13}/main/pg_hba.conf
+  - sudo service postgresql restart 13
+  - wget https://chromedriver.storage.googleapis.com/102.0.5005.61/chromedriver_linux64.zip
+  - unzip chromedriver_linux64.zip
+  - ln --symbolic chromedriver "${HOME}/bin/chromedriver"
+  - wget https://github.com/mozilla/geckodriver/releases/download/v0.31.0/geckodriver-v0.31.0-linux32.tar.gz
+  - mkdir geckodriver
+  - tar -xzf geckodriver-v0.31.0-linux32.tar.gz -C geckodriver
+  - export PATH=$PATH:$PWD/geckodriver
+
 before_script:
-  - pipenv install
+  - psql -c 'create database travis_ci_test;' -U postgres
+  - sudo systemctl start postgresql@13-main
+  - pg_lsclusters
+  - python manage.py migrate
+  - python manage.py loaddata fixtures/dbdump.json
   - python manage.py runserver &
+  - chmod +x ./coverage.sh
+  
+
+
+addons:
+  firefox: "60.0.1"
+  chrome: stable
+  postgresql: "13"
+  apt:
+    packages:
+    - chromium-chromedriver
+    - postgresql-13
+    - postgresql-client-13
 
 services:
   - postgresql
 
-env: DJANGO_SETTINGS_MODULE="config.settings.travis"
+env: 
+  global:
+    - PGPORT=5432
+    - DJANGO_SETTINGS_MODULE=config.settings.travis
+    - DJANGO_KEY=django-insecure-be12llf1uqajc#jnp5$1@lyaf=$-8yyavk!twj%f9u4#+a^6-
+    - DB_USER=travis
+    - DB_PWD=
+    - DB_NAME=
+    - DB_TEST=
 
 script:
   - ./coverage.sh
