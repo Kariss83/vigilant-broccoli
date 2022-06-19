@@ -15,6 +15,8 @@ flake8 = "*"
 flake8-dashboard = "*"
 flake8-html = "*"
 selenium = "*"
+raven = "*"
+sentry-sdk = "*"
 
 [dev-packages]
 pytest = "*"
