@@ -55,7 +55,10 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'home.apps.HomeConfig',
     'products.apps.ProductsConfig',
+    'crispy_forms',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -169,7 +172,6 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
 # Handling redirection from decorator @loginrequired
 LOGIN_URL = '/users/login/'
 LOGIN_REDIRECT_URL = '/users/login/'
@@ -180,3 +182,6 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
     }
 }
+
+# Setting Email for password Reset
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

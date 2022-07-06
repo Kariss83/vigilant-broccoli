@@ -80,3 +80,9 @@ def register_user(request):
 @login_required
 def profile(request):
     return render(request, 'accounts/profile.html', {})
+
+    
+# edit profile view
+@login_required
+def edit_profile(request):
+    return render(request, 'accounts/edit_profile.html', {})

@@ -18,6 +18,7 @@ selenium = "*"
 raven = "*"
 sentry-sdk = "*"
 psycopg2-binary = "*"
+django-crispy-forms = "*"
 
 [dev-packages]
 pytest = "*"
