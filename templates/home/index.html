@@ -12,7 +12,7 @@
 
 {% block h2topcontent %}
 <h2 class="text-white-75 mb-5">Trouvez un produit de substitution pour ceux que vous consommez tous les jours.</h2>
-<form method=POST action="{% url 'search' %}">
+<form method=POST action="{% url 'products:search' %}">
     {% csrf_token %}
     <div class="input-group mb-3">
         <input type="text" class="form-control" placeholder="Produit" name='searched' aria-label="Recipient's username" aria-describedby="button-addon2">

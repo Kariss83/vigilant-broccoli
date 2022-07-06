@@ -4,12 +4,12 @@ program in charge of parsing the sentence the user will pass to GrandPy.
 import random
 from django.test import TestCase
 
-from purbeurre.accounts.models import CustomUser
-from purbeurre.products.models import Categories, Favorites, Products
-from purbeurre.products.controllers.favorite_handling import SaveFavoriteProductModule as SFP
-from purbeurre.products.controllers.favorite_handling import GetAllFavoriteModule as GAF
-from purbeurre.products.controllers.get_product import GetProductModule as GP
-from purbeurre.products.controllers.find_substitute import SearchModule
+from accounts.models import CustomUser
+from products.models import Categories, Favorites, Products
+from products.controllers.favorite_handling import SaveFavoriteProductModule as SFP
+from products.controllers.favorite_handling import GetAllFavoriteModule as GAF
+from products.controllers.get_product import GetProductModule as GP
+from products.controllers.find_substitute import SearchModule
 
 
 def create_an_user(number):

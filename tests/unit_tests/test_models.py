@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from purbeurre.accounts.models import CustomUser
+from accounts.models import CustomUser
 
 
 class CustomUserModelTest(TestCase):

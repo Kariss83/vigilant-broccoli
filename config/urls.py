@@ -16,24 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from purbeurre.home.views import HomeView, LegalView
-from purbeurre.accounts.views import login_user, logout_user, register_user, profile
-from purbeurre.products.views import info_product, search_product, save_favorite
-from purbeurre.products.views import show_favorite
+import accounts.urls
+import home.urls
+import products.urls
 
 app_name = 'config'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', HomeView.as_view(), name='home'),
-    path('registration/', include('django.contrib.auth.urls')),
-    path('register/', register_user, name='register'),
-    path('profile/', profile, name='profile'),
-    path('search/', search_product, name='search'),
-    path('product/', info_product, name="product"),
-    path('save/', save_favorite, name='savefavorite'),
-    path('favorites/', show_favorite, name='displayfavorite'),
-    path('login/', login_user, name='login'),
-    path('logout/', logout_user, name='logout'),
-    path('legal/', LegalView.as_view(), name='legal')
+    path('', include(home.urls, namespace='home')),
+    path('users/', include(accounts.urls, namespace='users')),
+    path('products/', include(products.urls, namespace='products')),
 ]

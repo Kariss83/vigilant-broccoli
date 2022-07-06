@@ -2,10 +2,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
-from purbeurre.products.controllers.find_substitute import SearchModule
-from purbeurre.products.controllers.get_product import GetProductModule
-from purbeurre.products.controllers.favorite_handling import SaveFavoriteProductModule
-from purbeurre.products.controllers.favorite_handling import GetAllFavoriteModule
+from products.controllers.find_substitute import SearchModule
+from products.controllers.get_product import GetProductModule
+from products.controllers.favorite_handling import SaveFavoriteProductModule
+from products.controllers.favorite_handling import GetAllFavoriteModule
 
 
 def search_product(request):
@@ -43,7 +43,7 @@ def save_favorite(request):
         substitut_id = request.POST.get('favprod', None)
         searched_id = request.POST.get('searched_prod_id', None)
         saver.save_favorite_product(user_id, searched_id, substitut_id)
-        return redirect('/favorites/')
+        return redirect('/products/favorites/')
     else:
         return render(request, 'search/search.html', {})
 

@@ -52,9 +52,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'purbeurre.accounts.apps.AccountsConfig',
-    'purbeurre.home.apps.HomeConfig',
-    'purbeurre.products.apps.ProductsConfig',
+    'accounts.apps.AccountsConfig',
+    'home.apps.HomeConfig',
+    'products.apps.ProductsConfig',
 ]
 
 MIDDLEWARE = [
@@ -103,7 +103,7 @@ DATABASES = {
         'HOST': '127.0.0.1',
         'PORT': '5432',
         'TEST': {
-                'MIRROR': 'test'
+                'MIRROR': 'test',
             }
     },
     'test': {
@@ -171,8 +171,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Handling redirection from decorator @loginrequired
-LOGIN_URL = '/registration/login/'
-LOGIN_REDIRECT_URL = '/registration/login/'
+LOGIN_URL = '/users/login/'
+LOGIN_REDIRECT_URL = '/users/login/'
 
 # Help for resolving tests errors on POST test on some views
 CACHES = {

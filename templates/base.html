@@ -36,21 +36,21 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto my-2 my-lg-0">
                         <li class="nav-item nav-search_item">
-                            <form class="form-inline my-2 my-lg-0" method=POST action="{% url 'search' %}">
+                            <form class="form-inline my-2 my-lg-0" method=POST action="{% url 'products:search' %}">
                                 {% csrf_token %}
                                 <input class="form-control mr-sm-2" type="search" placeholder="Chercher" aria-label="Chercher" name='searched'>
                             </form>
                         </li>
                         {% if user.is_authenticated %}
                             <li class="nav-item nav-last-item">
-                                <a class="nav-link" href="/profile"><i class="bi bi-person"></i></a>
+                                <a class="nav-link" href="/users/profile"><i class="bi bi-person"></i></a>
                             </li>
                         {% else %}
                             <li class="nav-item nav-last-item">
-                                <a class="nav-link" href="/registration/login"><i class="bi bi-person-plus"></i></a>
+                                <a class="nav-link" href="/users/login"><i class="bi bi-person-plus"></i></a>
                             </li>
                         {% endif %}
-                        <li class="nav-item nav-last-item"><a class="nav-link nav-link-with-img" href="/favorites/"><svg
+                        <li class="nav-item nav-last-item"><a class="nav-link nav-link-with-img" href="/products/favorites/"><svg
                             width="16px"
                             height="22px"
                             viewBox="0 0 210 297"
@@ -96,7 +96,7 @@
                         </li>
                         {% if user.is_authenticated %}
                             <li class="nav-item nav-last-item">
-                                <a class="nav-link" href="/logout/"><i class="bi bi-box-arrow-right"></i></a>
+                                <a class="nav-link" href="/users/logout/"><i class="bi bi-box-arrow-right"></i></a>
                             </li>
                         {% else %}
                             <li class="nav-item nav-last-item">

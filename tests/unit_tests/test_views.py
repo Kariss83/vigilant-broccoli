@@ -5,10 +5,10 @@ import random
 from django.contrib import auth
 from django.test import TestCase, Client
 from django.urls import reverse
-from purbeurre.accounts.forms import CustomAuthenticationForm
+from accounts.forms import CustomAuthenticationForm
 
-from purbeurre.accounts.models import CustomUser
-from purbeurre.products.models import Categories, Favorites, Products
+from accounts.models import CustomUser
+from products.models import Categories, Favorites, Products
 
 
 def create_an_user(number):
@@ -64,11 +64,11 @@ class TestAccountsViewsModule(TestCase):
 
         cls.client = Client()
 
-        cls.home_url = reverse('home')
-        cls.register_url = reverse('register')
-        cls.login_url = reverse('login')
-        cls.logout_url = reverse('logout')
-        cls.profile_url = reverse('profile')
+        cls.home_url = reverse('home:home')
+        cls.register_url = reverse('users:register')
+        cls.login_url = reverse('users:login')
+        cls.logout_url = reverse('users:logout')
+        cls.profile_url = reverse('users:profile')
 
     def test_login_user_GET(self):
         response = self.client.get(self.login_url)
@@ -100,8 +100,8 @@ class TestAccountsViewsModule(TestCase):
         self.assertTrue(response.url.startswith('/'))
 
     def test_home_page_uses_item_form(self):
-        response = self.client.post(self.login_url, follow=True)
-
+        response = self.client.get(self.login_url, follow=True)
+        # import pdb; pdb.set_trace()
         self.assertIsInstance(
             response.context['form'],
             CustomAuthenticationForm
@@ -146,7 +146,7 @@ class TestAccountsViewsModule(TestCase):
 
     def test_register_user_POST_invalid_form(self):
         response = self.client.post(
-            self.register_url,
+            '/users/register/',
             {'email': 'test2@gmail.com',
              'password1': 'monsupermotdepasse',
              },
@@ -193,7 +193,7 @@ class TestAccountsViewsModule(TestCase):
         response = self.client.get(self.profile_url)
 
         self.assertEquals(response.status_code, 302)
-        self.assertTrue(response.url.startswith('/registration/login/'))
+        self.assertTrue(response.url.startswith('/users/login/'))
 
 
 class TestProductsViewsModule(TestCase):
@@ -215,10 +215,10 @@ class TestProductsViewsModule(TestCase):
 
         cls.client = Client()
 
-        cls.search_url = reverse('search')
-        cls.savefavorite_url = reverse('savefavorite')
-        cls.displayfavorite_url = reverse('displayfavorite')
-        cls.product_url = reverse('product')
+        cls.search_url = reverse('products:search')
+        cls.savefavorite_url = reverse('products:savefavorite')
+        cls.displayfavorite_url = reverse('products:displayfavorite')
+        cls.product_url = reverse('products:productinfo')
 
     def test_search_product_GET(self):
         response = self.client.get(self.search_url)
