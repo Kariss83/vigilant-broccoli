@@ -3,7 +3,7 @@ from django.core.management.base import BaseCommand
 import requests
 # from django.core.exceptions import ObjectDoesNotExist
 from .constants import CATEGORIES
-from purbeurre.products.models import Categories, Products
+from products.models import Categories, Products
 
 
 ####################################################################

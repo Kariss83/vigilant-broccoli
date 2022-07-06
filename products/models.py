@@ -1,5 +1,5 @@
 from django.db import models
-from purbeurre.accounts.models import CustomUser
+from accounts.models import CustomUser
 
 
 # Create your models here.

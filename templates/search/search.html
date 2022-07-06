@@ -48,7 +48,7 @@
                         <div class="row text-center">
                             <div>
                                 <h5 class="col text-dark text-center">
-                                    <form id="produrl" method=POST action="{% url 'product' %}">
+                                    <form id="produrl" method=POST action="{% url 'products:productinfo' %}">
                                         {% csrf_token %}
                                         <input type="hidden" name="prod_id" value="{{ prod.id }}">
                                         <button type="submit" name="submit_param" value="submit_value" class="link-button btn btn-primary text-dark">
@@ -65,7 +65,7 @@
                                             <img src="{% static 'assets/img/logo_pur_beurre.png' %}" height="25rem" width="25rem" style="padding-bottom: 0.25rem"></img>
                                         </button>
                                         {% else %}
-                                        <form id="prodfav" method=POST action="{% url 'savefavorite' %}">
+                                        <form id="prodfav" method=POST action="{% url 'products:savefavorite' %}">
                                             {% csrf_token %}
                                             <input type="hidden" name="searched_prod_id" value="{{ searched_prod.id }}">
                                             <input type="hidden" name="favprod" value="{{ prod.id }}">

@@ -5,11 +5,12 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver import FirefoxOptions
 
-from purbeurre.accounts.models import CustomUser
-from purbeurre.products.models import Products, Categories, Favorites
+from accounts.models import CustomUser
+from products.models import Products, Categories, Favorites
 
 opts = FirefoxOptions()
 opts.add_argument("--headless")
+
 
 
 def create_an_user(number):
@@ -73,19 +74,18 @@ class UserLoginTest(TestCase):
     def test_can_login(self):
         self.browser.get('http://localhost:8000')
 
-        # She notices the page title and header mention to-do lists
-        h1text = self.browser.find_element_by_css_selector('.text-white')
+        h1text = self.browser.find_element(By.CSS_SELECTOR, '.text-white')
         self.assertTrue(h1text.is_displayed)
         self.assertIn('Purbeurre', self.browser.title)
         # self.assertIn('Du gras, oui, mais de qualité!', )
         self.browser.find_element(By.CLASS_NAME, "bi-person-plus").click()
-        username = self.browser.find_element_by_id('id_username')
+        username = self.browser.find_element(By.ID, 'id_username')
         username.send_keys("test15@gmail.com")
-        password = self.browser.find_element_by_id('id_password')
+        password = self.browser.find_element(By.ID, 'id_password')
         password.send_keys("monsupermotdepasse")
-        submit_button = self.browser.find_element_by_css_selector('.btn')
+        submit_button = self.browser.find_element(By.CSS_SELECTOR, '.btn')
         submit_button.click()
-        message = self.browser.find_element_by_class_name('alert')
+        message = self.browser.find_element(By.CLASS_NAME, 'alert')
         self.assertIn('Vous êtes connecté(e)!', message.text)
         # user_id = CustomUser.objects.all()[0].id
         # self.client.get(reverse('home'), follow=True)

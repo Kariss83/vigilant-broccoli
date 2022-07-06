@@ -7,7 +7,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 
-from purbeurre.accounts.models import CustomUser
+from accounts.models import CustomUser
 
 
 opts = FirefoxOptions()
@@ -38,25 +38,25 @@ class FavoritesTest(TestCase):
         self.browser.get('http://localhost:8000')
 
         self.browser.find_element(By.CLASS_NAME, "bi-person-plus").click()
-        username = self.browser.find_element_by_id('id_username')
+        username = self.browser.find_element(By.ID, 'id_username')
         username.send_keys("test15@gmail.com")
-        password = self.browser.find_element_by_id('id_password')
+        password = self.browser.find_element(By.ID, 'id_password')
         password.send_keys("monsupermotdepasse")
-        submit_button = self.browser.find_element_by_css_selector('.btn')
+        submit_button = self.browser.find_element(By.CSS_SELECTOR, '.btn')
         submit_button.click()
-        message = self.browser.find_element_by_class_name('alert')
+        message = self.browser.find_element(By.CLASS_NAME, 'alert')
         self.assertIn('Vous êtes connecté(e)!', message.text)
 
-        search = self.browser.find_element_by_css_selector(
+        search = self.browser.find_element(By.CSS_SELECTOR,
             '.input-group > input:nth-child(1)'
             )
         search.send_keys("coca")
-        submit_button = self.browser.find_element_by_id('button-addon2')
+        submit_button = self.browser.find_element(By.ID, 'button-addon2')
         submit_button.click()
-        results = self.browser.find_element_by_css_selector('#about')
+        results = self.browser.find_element(By.CSS_SELECTOR, '#about')
         self.assertIn("Volvic", results.text)
 
-        elements = self.browser.find_elements_by_id("save_button")
+        elements = self.browser.find_elements(By.ID, "save_button")
         scroll_shim(self.browser, elements[0])
 
         actions = ActionChains(self.browser)
@@ -64,9 +64,9 @@ class FavoritesTest(TestCase):
         actions.click()
         actions.perform()
 
-        my_favs = self.browser.find_element_by_css_selector('.nav-link-with-img')
+        my_favs = self.browser.find_element(By.CSS_SELECTOR, '.nav-link-with-img')
         my_favs.click()
-        saved = self.browser.find_element_by_css_selector('div.col-lg-8:nth-child(1)')
+        saved = self.browser.find_element(By.CSS_SELECTOR, 'div.col-lg-8:nth-child(1)')
         self.assertIn('Perrier', saved.text)
 
     def tearDown(self):

@@ -20,7 +20,7 @@
             <div class="col-lg-8 align-self-baseline">
                 {% block h2topcontent %}
 				<div class="col-md-6 offset-md-3">
-					<form method=POST action="{% url 'login' %}">
+					<form method=POST action="{% url 'users:login' %}">
 						{% csrf_token %}
 				
 						{{ form.as_p }}
@@ -30,7 +30,7 @@
 					
 						<div>
 							<p>
-							<a href="/register">Créer un compte</a>
+							<a href="/users/register">Créer un compte</a>
 							</p>
 						</div>
 					</form>

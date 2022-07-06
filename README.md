@@ -42,7 +42,7 @@ Prerequisites : you need to have installed git, pipenv and postgresql on your ma
     - (optionnal) You can set up flake8 by creating a setup.cfg file with the following content :
     ```
     [flake8]
-    exclude = purbeurre/accounts/migrations,purbeurre/home/migrations,purbeurre/products/migrations
+    exclude = accounts/migrations,home/migrations,products/migrations
     max-complexity = 10
     max-line-length = 119
     ```

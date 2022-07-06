@@ -2,7 +2,7 @@
 
 from django.db import migrations, models
 import django.utils.timezone
-import purbeurre.accounts.models
+import accounts.models
 
 
 class Migration(migrations.Migration):
@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
                 'verbose_name_plural': 'users',
             },
             managers=[
-                ('objects', purbeurre.accounts.models.CustomUserManager()),
+                ('objects', accounts.models.CustomUserManager()),
             ],
         ),
     ]

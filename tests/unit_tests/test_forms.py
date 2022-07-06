@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from purbeurre.accounts.forms import CustomAuthenticationForm
+from accounts.forms import CustomAuthenticationForm
 
 
 class CustomAuthenticationFormTest(TestCase):

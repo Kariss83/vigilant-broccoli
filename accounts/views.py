@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
-from purbeurre.accounts.forms import CustomUserCreationForm, CustomAuthenticationForm
+from accounts.forms import CustomUserCreationForm, CustomAuthenticationForm
 
 
 # Create your views here.
@@ -27,11 +27,11 @@ def login_user(request):
                     request,
                     ('Erreur de connexion - Veuillez reéssayer...')
                     )
-                return redirect('/login')
+                return redirect('/users/login')
         else:
             messages.error(request, (
                 'Erreur de connexion - Veuillez reéssayer...'))
-            return redirect('/login')
+            return redirect('/users/login')
     else:
         return render(
             request,
@@ -65,7 +65,7 @@ def register_user(request):
         else:
             messages.error(request, (
                 'Erreur de Création de Comptes - Veuillez reéssayer...'))
-            return redirect('/register')
+            return redirect('/users/register')
     else:
         form = CustomUserCreationForm()
         context = {'form': form}
