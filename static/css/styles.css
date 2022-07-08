@@ -332,6 +332,7 @@ th {
 
 label {
   display: inline-block;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 button {
@@ -11482,7 +11483,7 @@ button#button-addon2.btn.btn-outline-secondary{
 }
 
 input.form-control.mr-sm-2{
-  background-color: lightgrey;
+  background-color: #fff;
   font-size: small;
 }
 
@@ -11535,4 +11536,8 @@ button.btn-circle.btn-sm{
 
 .asteriskField {
   display: none;
+}
+
+.form-group {
+  margin-bottom: .5rem;
 }

@@ -98,7 +98,7 @@ def edit_profile(request):
 			name = form.data['name']
 			form.save()
 			messages.success(request, ('Modifications enregistrées avec succès.'))
-			return redirect('/')
+			return redirect('/users/profile')
 		else:
 			messages.error(request, (
 				'Erreur de modification des informations, le formulaire n\'est pas valide'))

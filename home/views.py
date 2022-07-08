@@ -13,6 +13,7 @@ from django.utils.encoding import force_bytes
 from django.contrib import messages #import messages
 
 from accounts.models import CustomUser
+from accounts.forms import CustomPasswordResetForm
 
 
 # Create your views here.
@@ -25,7 +26,7 @@ class LegalView(TemplateView):
 
 def password_reset_request(request):
 	if request.method == "POST":
-		password_reset_form = PasswordResetForm(request.POST)
+		password_reset_form = CustomPasswordResetForm(request.POST)
 		if password_reset_form.is_valid():
 			data = password_reset_form.cleaned_data['email']
 			associated_users = CustomUser.objects.filter(Q(email=data))
@@ -51,5 +52,5 @@ def password_reset_request(request):
 					messages.success(request, 'A message with reset password instructions has been sent to your inbox.')
 					return redirect ('home:home')
 			messages.error(request, 'An invalid email has been entered.')
-	password_reset_form = PasswordResetForm()
+	password_reset_form = CustomPasswordResetForm()
 	return render(request=request, template_name="passwords/password_reset.html", context={"password_reset_form":password_reset_form})
