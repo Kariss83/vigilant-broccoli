@@ -11532,3 +11532,7 @@ button.btn-circle.btn-sm{
 #product_presentation{
   color: lightgray;
 }
+
+.asteriskField {
+  display: none;
+}

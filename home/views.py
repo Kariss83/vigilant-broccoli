@@ -10,17 +10,18 @@ from django.db.models.query_utils import Q
 from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
+from django.contrib import messages #import messages
 
 from accounts.models import CustomUser
 
 
 # Create your views here.
 class HomeView(TemplateView):
-    template_name = 'home/index.html'
+	template_name = 'home/index.html'
 
 
 class LegalView(TemplateView):
-    template_name = "home/legal.html"
+	template_name = "home/legal.html"
 
 def password_reset_request(request):
 	if request.method == "POST":
@@ -46,6 +47,9 @@ def password_reset_request(request):
 						send_mail(subject, email, 'admin@example.com' , [user.email], fail_silently=False)
 					except BadHeaderError:
 						return HttpResponse('Invalid header found.')
-					return redirect ("/password_reset/done/")
+					# return redirect ("/password_reset/done/")
+					messages.success(request, 'A message with reset password instructions has been sent to your inbox.')
+					return redirect ('home:home')
+			messages.error(request, 'An invalid email has been entered.')
 	password_reset_form = PasswordResetForm()
 	return render(request=request, template_name="passwords/password_reset.html", context={"password_reset_form":password_reset_form})
