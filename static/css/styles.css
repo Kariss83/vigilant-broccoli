@@ -11541,3 +11541,16 @@ button.btn-circle.btn-sm{
 .form-group {
   margin-bottom: .5rem;
 }
+
+.p-5 {
+  color: lightgray;
+}
+
+small#hint_id_new_password1.text-muted {
+  color: lightgray !important;
+}
+
+.p-4 {
+  color: lightgray;
+}
+

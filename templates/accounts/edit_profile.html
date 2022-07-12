@@ -16,7 +16,8 @@
                 {% endif %}
                 <div class="col-lg-8 align-self-top">
                     {% block h1topcontent %}
-                        <p>Entrez vos nouvelles informations.</p>
+                        <h2 class="text-white-75">Entrez vos nouvelles informations</h2>
+                        <br>
                         <form method="POST">
                             {% csrf_token %}
                             {{ form|crispy }}
