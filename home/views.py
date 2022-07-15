@@ -36,21 +36,20 @@ def password_reset_request(request):
 					email_template_name = "passwords/password_reset_email.txt"
 					c = {
 					"email":user.email,
-					'domain':'127.0.0.1:8000',
-					'site_name': 'Website',
+					'domain':'purbeurre.gitgudat.com',
+					'site_name': 'PurBeurre',
 					"uid": urlsafe_base64_encode(force_bytes(user.pk)),
 					"user": user,
 					'token': default_token_generator.make_token(user),
-					'protocol': 'http',
+					'protocol': 'https',
 					}
 					email = render_to_string(email_template_name, c)
 					try:
-						send_mail(subject, email, 'admin@purbeurre.com' , [user.email], fail_silently=False)
+						send_mail(subject, email, 'root@vps-8351387e.vps.ovh.net' , [user.email], fail_silently=False)
 					except BadHeaderError:
 						return HttpResponse('Invalid header found.')
-					# return redirect ("/password_reset/done/")
 					messages.success(request, 'Un message contenant les instructions de réinitialisation vous a été envoyé.')
 					return redirect ('home:home')
-			messages.error(request, 'Cet Email est invalide.')
+			messages.error(request, 'Cet email est invalide.')
 	password_reset_form = CustomPasswordResetForm()
 	return render(request=request, template_name="passwords/password_reset.html", context={"password_reset_form":password_reset_form})
