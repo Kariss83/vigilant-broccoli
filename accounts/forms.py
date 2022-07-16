@@ -12,7 +12,7 @@ class CustomAuthenticationForm(base_form.Form):
 	username/password logins.
 	"""
 
-	username = base_form.EmailField(
+	email = base_form.EmailField(
 		label='Email',
 		widget=base_form.TextInput(
 								   attrs={
