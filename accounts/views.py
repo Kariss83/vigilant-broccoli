@@ -20,7 +20,7 @@ def login_user(request):
 		# import pdb; pdb.set_trace()
 		form = CustomAuthenticationForm(request.POST)
 		if form.is_valid():
-			email = request.POST.get('username', '')
+			email = request.POST.get('email', '')
 			password = request.POST.get('password', '')
 			user = authenticate(request, email=email, password=password)
 			if user is not None:

@@ -88,7 +88,7 @@ class TestAccountsViewsModule(TestCase):
 	def test_login_user_POST(self):
 		response = self.client.post(
 			self.login_url,
-			{'username': 'test@gmail.com', 'password': 'monsupermotdepasse'},
+			{'email': 'test@gmail.com', 'password': 'monsupermotdepasse'},
 			)
 
 		self.assertEqual(
@@ -109,13 +109,13 @@ class TestAccountsViewsModule(TestCase):
 	def test_login_user_POST_invalid_form(self):
 		form = CustomAuthenticationForm(
 			data={
-				'username': '',
+				'email': '',
 				'password': 'monsupermotdepasse'
 				}
 			)
 		self.assertFalse(form.is_valid())
 		self.assertEqual(
-			form.errors['username'],
+			form.errors['email'],
 			["Ce champ est obligatoire."]
 		)
 

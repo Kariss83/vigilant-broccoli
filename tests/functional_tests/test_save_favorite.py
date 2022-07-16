@@ -38,7 +38,7 @@ class FavoritesTest(TestCase):
         self.browser.get('http://localhost:8000')
 
         self.browser.find_element(By.CLASS_NAME, "bi-person-plus").click()
-        username = self.browser.find_element(By.ID, 'id_username')
+        username = self.browser.find_element(By.ID, 'id_email')
         username.send_keys("test15@gmail.com")
         password = self.browser.find_element(By.ID, 'id_password')
         password.send_keys("monsupermotdepasse")
