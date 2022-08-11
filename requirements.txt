@@ -19,7 +19,7 @@ coverage==6.4.1
 cryptography==37.0.2
 distlib==0.3.4
 dj-database-url==0.5.0
-django==4.0.6
+django==4.0.7
 filelock==3.7.1; python_version >= '3.7'
 flake8-dashboard==0.1.4
 flake8-html==0.4.2
