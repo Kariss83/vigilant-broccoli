@@ -76,12 +76,9 @@ class FavoritesTest(StaticLiveServerTestCase):
         scroll_shim(self.selenium, elements[1])
 
         actions = ActionChains(self.selenium)
-        # actions.move_to_element(elements[0])
         actions.click()
         actions.perform()
 
-        # my_favs = self.selenium.find_element(By.XPATH, '//*[@id="save_button"]/i')
-        # my_favs.click()
         saved = self.selenium.find_element(By.CSS_SELECTOR, "#page-top > header")
         self.assertIn("test0", saved.text)
 

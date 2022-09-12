@@ -253,14 +253,10 @@ class TestProductsViewsModule(TestCase):
     def setUpTestData(cls):
         cls.user = CustomUser.objects.get(email="test1@gmail.com")
 
-        # cls.user = create_an_user(1)
-        # cls.user.set_password("monsupermotdepasse")
-        # cls.user.save()
         cls.cat = create_a_category("Test")
         for i in range(10):
             create_a_product(i, random.choice(["a", "b", "c", "d", "e"]), cls.cat)
         cls.prod1, cls.prod2 = Products.objects.all()[:2]
-        # cls.fav1 = create_a_favorite(cls.user, cls.prod1, cls.prod2)
         cls.fav1 = create_a_favorite(cls.user, cls.prod1, cls.prod2)
 
         cls.client = Client()
@@ -348,10 +344,6 @@ class TestHomeViewsModule(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.user = CustomUser.objects.get(email="test1@gmail.com")
-
-        # cls.user = create_an_user(1)
-        # cls.user.set_password("monsupermotdepasse")
-        # cls.user.save()
 
         cls.client = Client()
 

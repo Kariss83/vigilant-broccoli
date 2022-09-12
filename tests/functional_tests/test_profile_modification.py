@@ -55,9 +55,6 @@ class UserLoginTest(StaticLiveServerTestCase):
         cls.selenium = webdriver.Firefox(options=opts)
         cls.selenium.implicitly_wait(10)
 
-        # cls.user = create_an_user(1)
-        # cls.user.set_password("monsupermotdepasse")
-        # cls.user.save()
         cls.user = CustomUser.objects.get(email="test1@gmail.com")
 
         cls.cat = create_a_category("Test")
@@ -70,7 +67,6 @@ class UserLoginTest(StaticLiveServerTestCase):
         cls.fav1 = Favorites.objects.get(
             user=cls.user, searched_product=cls.prod1, substitution_product=cls.prod2
         )
-        # create_a_favorite(cls.user, cls.prod1, cls.prod2)
 
     @classmethod
     def tearDownClass(cls):
@@ -83,7 +79,6 @@ class UserLoginTest(StaticLiveServerTestCase):
         h1text = self.selenium.find_element(By.CSS_SELECTOR, ".text-white")
         self.assertTrue(h1text.is_displayed)
         self.assertIn("Purbeurre", self.selenium.title)
-        # self.assertIn('Du gras, oui, mais de qualité!', )
         self.selenium.find_element(By.CLASS_NAME, "bi-person-plus").click()
         username = self.selenium.find_element(By.ID, "id_email")
         username.send_keys("test1@gmail.com")

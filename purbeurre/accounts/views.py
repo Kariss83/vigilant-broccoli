@@ -15,9 +15,7 @@ from purbeurre.accounts.forms import (
 
 # login view
 def login_user(request):
-    # import pdb; pdb.set_trace()
     if request.method == "POST":
-        # import pdb; pdb.set_trace()
         form = CustomAuthenticationForm(request.POST)
         if form.is_valid():
             email = request.POST.get("email", "")
@@ -56,7 +54,6 @@ def register_user(request):
             password = form.cleaned_data["password1"]
             form.save()
             user = authenticate(email=email, password=password)
-            # import pdb; pdb.set_trace()
             if user is not None:
                 login(request, user)
                 messages.success(request, ("Vous êtes enregistré(e)..."))
@@ -82,7 +79,6 @@ def profile(request):
 @login_required
 def edit_profile(request):
     if request.method == "POST":
-        # import pdb; pdb.set_trace()
         form = CustomUserChangeForm(request.POST, instance=request.user)
         if form.is_valid():
             email = form.data["email"]

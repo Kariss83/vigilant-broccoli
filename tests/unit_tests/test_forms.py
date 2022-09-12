@@ -10,7 +10,7 @@ from purbeurre.accounts.forms import (
 class CustomAuthenticationFormTest(TestCase):
     def test_authentication_form_password_field_label(self):
         form = CustomAuthenticationForm()
-        # import pdb; pdb.set_trace()
+
         self.assertTrue(form.fields["password"].label == "Mot de passe")
 
 
@@ -24,5 +24,5 @@ class CustomeUserChangeForm(TestCase):
 class CustomAuthenticationFormTest(TestCase):
     def test_authentication_form_password_field_label(self):
         form = CustomPasswordResetForm()
-        # import pdb; pdb.set_trace()
+
         self.assertTrue(form.fields["email"].label == "Email")

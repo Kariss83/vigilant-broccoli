@@ -8,7 +8,6 @@ class CustomUserModelTest(TestCase):
     def setUpTestData(cls):
         # Set up non-modified objects used by all test methods
         cls.user = CustomUser.objects.create(email="test@gmail.com", name="Bob")
-        # import pdb; pdb.set_trace()
 
     def test_object_name_is_just_name(self):
         expected_object_name = "Bob"
@@ -20,11 +19,6 @@ class CustomUserModelTest(TestCase):
 
 
 class CustomUserManagerModelTest(TestCase):
-    # @classmethod
-    # def setUpTestData(cls):
-    #     # Set up non-modified objects used by all test methods
-    #     CustomUser.objects.create(email='test@gmail.com', name='Bob')
-
     def test_an_user_can_be_created(self):
         user = CustomUser.objects.create_user(
             email="test2@gmail.com", name="Bob2", password="testpassword"

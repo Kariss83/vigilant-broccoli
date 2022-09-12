@@ -55,9 +55,6 @@ class UserLoginTest(StaticLiveServerTestCase):
         cls.selenium.implicitly_wait(10)
         cls.user = CustomUser.objects.get(email="test1@gmail.com")
 
-        # cls.user = create_an_user(1)
-        # cls.user.set_password("monsupermotdepasse")
-        # cls.user.save()
         cls.cat = create_a_category("Test")
         for i in range(10):
             create_a_product(i, random.choice(["a", "b", "c", "d", "e"]), cls.cat)
@@ -75,7 +72,6 @@ class UserLoginTest(StaticLiveServerTestCase):
         h1text = self.selenium.find_element(By.CSS_SELECTOR, ".text-white")
         self.assertTrue(h1text.is_displayed)
         self.assertIn("Purbeurre", self.selenium.title)
-        # self.assertIn('Du gras, oui, mais de qualité!', )
         self.selenium.find_element(By.CLASS_NAME, "bi-person-plus").click()
         email = self.selenium.find_element(By.ID, "id_email")
         email.send_keys("test1@gmail.com")

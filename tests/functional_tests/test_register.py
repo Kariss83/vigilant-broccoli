@@ -39,7 +39,6 @@ class UserCreationTest(StaticLiveServerTestCase):
         submit_button = self.selenium.find_element(By.CSS_SELECTOR, ".btn")
         submit_button.click()
         message = self.selenium.find_element(By.CSS_SELECTOR, ".alert")
-        # import pdb; pdb.set_trace()
         self.assertIn("Vous êtes enregistré(e)...", message.text)
         profile_access = self.selenium.find_element(By.CSS_SELECTOR, ".bi-person")
         self.assertTrue(profile_access.is_displayed())

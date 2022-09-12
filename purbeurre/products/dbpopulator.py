@@ -52,10 +52,8 @@ class DBpopulator(BaseCommand):
         """This method will populate the DB with data from the API"""
         self.json_response = self.response.json()["products"]
         for rec in self.json_response:
-            print(rec)
             # extracts all the needed info of a given product in order to
             # store it in DB
-            # rec.get('product_name_fr', None)
             try:
                 name = rec["product_name_fr"]
                 url = rec["url"]
