@@ -6,5 +6,13 @@ Description:
     able to find substitute in.
 """
 
-CATEGORIES = ["boissons", "viandes", "desserts", "produits laitiers",
-              "produits de la mer", "condiments", "plats préparés", "pizza"]
+CATEGORIES = [
+    "boissons",
+    "viandes",
+    "desserts",
+    "produits laitiers",
+    "produits de la mer",
+    "condiments",
+    "plats préparés",
+    "pizza",
+]

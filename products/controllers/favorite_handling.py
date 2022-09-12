@@ -2,7 +2,7 @@ from products.models import Products, Favorites
 from accounts.models import CustomUser
 
 
-class SaveFavoriteProductModule():
+class SaveFavoriteProductModule:
     @staticmethod
     def save_favorite_product(user_id, product_id, searched_product_id):
         try:
@@ -12,14 +12,14 @@ class SaveFavoriteProductModule():
             Favorites.objects.get_or_create(
                 searched_product=searched_product,
                 substitution_product=product_to_save,
-                user=user
-                )
+                user=user,
+            )
         except Exception:
             message = "Impossible de sauvegarder le produit."
             return message
 
 
-class GetAllFavoriteModule():
+class GetAllFavoriteModule:
     @staticmethod
     def get_users_favorite(user_id):
         try:

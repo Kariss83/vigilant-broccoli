@@ -15,17 +15,18 @@ opts.add_argument("--headless")
 
 
 def scroll_shim(passed_in_driver, object):
-    x = object.location['x']
-    y = object.location['y']
-    scroll_by_coord = f'window.scrollTo({x},{y});'
-    scroll_nav_out_of_way = 'window.scrollBy(0, -10);'
+    x = object.location["x"]
+    y = object.location["y"]
+    scroll_by_coord = f"window.scrollTo({x},{y});"
+    scroll_nav_out_of_way = "window.scrollBy(0, -10);"
     passed_in_driver.execute_script(scroll_by_coord)
     passed_in_driver.execute_script(scroll_nav_out_of_way)
-    WebDriverWait(passed_in_driver, 20).until(EC.element_to_be_clickable((By.ID, "save_button")))
+    WebDriverWait(passed_in_driver, 20).until(
+        EC.element_to_be_clickable((By.ID, "save_button"))
+    )
 
 
 class FavoritesTest(TestCase):
-
     @classmethod
     def setUpTestData(cls):
         CustomUser.objects.all().delete()
@@ -35,25 +36,25 @@ class FavoritesTest(TestCase):
         cls.browser.set_window_size(2400, 1000)
 
     def test_can_save_favorite(self):
-        self.browser.get('http://localhost:8000')
+        self.browser.get("http://localhost:8000")
 
         self.browser.find_element(By.CLASS_NAME, "bi-person-plus").click()
-        username = self.browser.find_element(By.ID, 'id_email')
+        username = self.browser.find_element(By.ID, "id_email")
         username.send_keys("test15@gmail.com")
-        password = self.browser.find_element(By.ID, 'id_password')
+        password = self.browser.find_element(By.ID, "id_password")
         password.send_keys("monsupermotdepasse")
-        submit_button = self.browser.find_element(By.CSS_SELECTOR, '.btn')
+        submit_button = self.browser.find_element(By.CSS_SELECTOR, ".btn")
         submit_button.click()
-        message = self.browser.find_element(By.CLASS_NAME, 'alert')
-        self.assertIn('Vous êtes connecté(e)!', message.text)
+        message = self.browser.find_element(By.CLASS_NAME, "alert")
+        self.assertIn("Vous êtes connecté(e)!", message.text)
 
-        search = self.browser.find_element(By.CSS_SELECTOR,
-            '.input-group > input:nth-child(1)'
-            )
+        search = self.browser.find_element(
+            By.CSS_SELECTOR, ".input-group > input:nth-child(1)"
+        )
         search.send_keys("coca")
-        submit_button = self.browser.find_element(By.ID, 'button-addon2')
+        submit_button = self.browser.find_element(By.ID, "button-addon2")
         submit_button.click()
-        results = self.browser.find_element(By.CSS_SELECTOR, '#about')
+        results = self.browser.find_element(By.CSS_SELECTOR, "#about")
         self.assertIn("Volvic", results.text)
 
         elements = self.browser.find_elements(By.ID, "save_button")
@@ -64,14 +65,14 @@ class FavoritesTest(TestCase):
         actions.click()
         actions.perform()
 
-        my_favs = self.browser.find_element(By.CSS_SELECTOR, '.nav-link-with-img')
+        my_favs = self.browser.find_element(By.CSS_SELECTOR, ".nav-link-with-img")
         my_favs.click()
-        saved = self.browser.find_element(By.CSS_SELECTOR, 'div.col-lg-8:nth-child(1)')
-        self.assertIn('Perrier', saved.text)
+        saved = self.browser.find_element(By.CSS_SELECTOR, "div.col-lg-8:nth-child(1)")
+        self.assertIn("Perrier", saved.text)
 
     def tearDown(self):
         self.browser.quit()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     pass

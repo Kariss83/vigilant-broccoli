@@ -15,50 +15,129 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Categories',
+            name="Categories",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(help_text="Entrez le nom d'une catégorie.", max_length=200)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        help_text="Entrez le nom d'une catégorie.", max_length=200
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Products',
+            name="Products",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255)),
-                ('url', models.URLField(max_length=255)),
-                ('image', models.URLField(max_length=255)),
-                ('nutriscore', models.CharField(max_length=255)),
-                ('energy', models.FloatField()),
-                ('fat', models.FloatField()),
-                ('saturated_fat', models.FloatField()),
-                ('sugar', models.FloatField()),
-                ('salt', models.FloatField()),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='products.categories')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255)),
+                ("url", models.URLField(max_length=255)),
+                ("image", models.URLField(max_length=255)),
+                ("nutriscore", models.CharField(max_length=255)),
+                ("energy", models.FloatField()),
+                ("fat", models.FloatField()),
+                ("saturated_fat", models.FloatField()),
+                ("sugar", models.FloatField()),
+                ("salt", models.FloatField()),
+                (
+                    "category",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="products.categories",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='ProductCategory',
+            name="ProductCategory",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('id_category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='products.categories')),
-                ('id_product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='products.products')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "id_category",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="products.categories",
+                    ),
+                ),
+                (
+                    "id_product",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="products.products",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Favorites',
+            name="Favorites",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('searched_product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='searched_product', to='products.products')),
-                ('substitution_product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='substitution_product', to='products.products')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='user', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "searched_product",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="searched_product",
+                        to="products.products",
+                    ),
+                ),
+                (
+                    "substitution_product",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="substitution_product",
+                        to="products.products",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="user",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
             options={
-                'ordering': ['id'],
+                "ordering": ["id"],
             },
         ),
         migrations.AddConstraint(
-            model_name='favorites',
-            constraint=models.UniqueConstraint(fields=('searched_product', 'substitution_product', 'user'), name='no_double'),
+            model_name="favorites",
+            constraint=models.UniqueConstraint(
+                fields=("searched_product", "substitution_product", "user"),
+                name="no_double",
+            ),
         ),
     ]

@@ -4,7 +4,7 @@ from products.constants import CATEGORIES
 
 
 class Command(BaseCommand):
-    help = 'Populating the DB with the categories inside the CATEGORIES'
+    help = "Populating the DB with the categories inside the CATEGORIES"
 
     def handle(self, *args, **options):
         """This method takes needed actions to create and populate the DB"""
@@ -15,4 +15,4 @@ class Command(BaseCommand):
             dbpopulator.create_crits(cat, 1000)
             dbpopulator.request()
             dbpopulator.populate_products(cat)
-        self.stdout.write(self.style.SUCCESS('DB initialisée avec succès.'))
+        self.stdout.write(self.style.SUCCESS("DB initialisée avec succès."))

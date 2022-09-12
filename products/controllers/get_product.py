@@ -1,7 +1,7 @@
 from products.models import Products
 
 
-class GetProductModule():
+class GetProductModule:
     @staticmethod
     def find_a_product_by_id(id):
         try:

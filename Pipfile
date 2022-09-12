@@ -22,6 +22,7 @@ django-crispy-forms = "*"
 
 [dev-packages]
 selenium = "*"
+black = "*"
 
 [requires]
 python_version = "3.9"

@@ -15,7 +15,15 @@ class CustomUserAdmin(UserAdmin):
     add_form_template = "admin/auth/user/add_form.html"
     change_user_password_template = None
     fieldsets = (
-        (None, {"fields": ("email", "password",)}),
+        (
+            None,
+            {
+                "fields": (
+                    "email",
+                    "password",
+                )
+            },
+        ),
         (
             _("Permissions"),
             {
