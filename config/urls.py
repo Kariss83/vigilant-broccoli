@@ -15,21 +15,40 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.contrib.auth import views as auth_views #import this
+from django.contrib.auth import views as auth_views  # import this
 
-import accounts.urls
-import home.urls
-import products.urls
+import purbeurre.accounts.urls
+import purbeurre.home.urls
+import purbeurre.products.urls
 
-app_name = 'config'
+app_name = "config"
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
     # path('accounts/', include('django.contrib.auth.urls')),
-    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='passwords/password_reset_done.html'), name='password_reset_done'),
-    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="passwords/password_reset_confirm.html"), name='password_reset_confirm'),
-    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='passwords/password_reset_complete.html'), name='password_reset_complete'),
-    path('', include(home.urls, namespace='home')),
-    path('users/', include(accounts.urls, namespace='users')),
-    path('products/', include(products.urls, namespace='products')),
+    path(
+        "password_reset/done/",
+        auth_views.PasswordResetDoneView.as_view(
+            template_name="passwords/password_reset_done.html"
+        ),
+        name="password_reset_done",
+    ),
+    path(
+        "reset/<uidb64>/<token>/",
+        auth_views.PasswordResetConfirmView.as_view(
+            template_name="passwords/password_reset_confirm.html"
+        ),
+        name="password_reset_confirm",
+    ),
+    path(
+        "reset/done/",
+        auth_views.PasswordResetCompleteView.as_view(
+            template_name="passwords/password_reset_complete.html"
+        ),
+        name="password_reset_complete",
+    ),
+    path("", include(purbeurre.home.urls, namespace="home")),
+    path("users/", include(purbeurre.accounts.urls, namespace="users")),
+    path("products/", include(purbeurre.products.urls, namespace="products")),
 ]

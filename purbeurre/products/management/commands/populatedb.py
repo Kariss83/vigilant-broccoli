@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
-from products.dbpopulator import DBpopulator
-from products.constants import CATEGORIES
+from purbeurre.products.dbpopulator import DBpopulator
+from purbeurre.products.constants import CATEGORIES
 
 
 class Command(BaseCommand):

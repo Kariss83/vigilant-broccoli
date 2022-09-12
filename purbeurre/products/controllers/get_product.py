@@ -1,4 +1,4 @@
-from products.models import Products
+from purbeurre.products.models import Products
 
 
 class GetProductModule:

@@ -2,14 +2,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
-from products.controllers.find_substitute import SearchModule
-from products.controllers.get_product import GetProductModule
-from products.controllers.favorite_handling import SaveFavoriteProductModule
-from products.controllers.favorite_handling import GetAllFavoriteModule
+from purbeurre.products.controllers.find_substitute import SearchModule
+from purbeurre.products.controllers.get_product import GetProductModule
+from purbeurre.products.controllers.favorite_handling import SaveFavoriteProductModule
+from purbeurre.products.controllers.favorite_handling import GetAllFavoriteModule
 
 
 def search_product(request):
-    # import pdb; pdb.set_trace()
     if request.method == "POST":
         searched = request.POST["searched"]
         search_module = SearchModule()
@@ -22,7 +21,6 @@ def search_product(request):
 
 def info_product(request):
     """Return the information about the selected product."""
-    # import pdb; pdb.set_trace()
 
     if request.method == "POST":
         prod_id = request.POST.get("prod_id", None)

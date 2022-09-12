@@ -1,12 +1,14 @@
 import random
-from django.test import TestCase, Client
+from django.test import Client
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
+
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver import FirefoxOptions
 
-from accounts.models import CustomUser
-from products.models import Products, Categories, Favorites
+from purbeurre.accounts.models import CustomUser
+from purbeurre.products.models import Products, Categories, Favorites
 
 opts = FirefoxOptions()
 opts.add_argument("--headless")
@@ -47,7 +49,7 @@ def create_a_favorite(user, searched_prod, replacement_prod):
     return favorite
 
 
-class UserLoginTest(TestCase):
+class UserLoginTest(StaticLiveServerTestCase):
     @classmethod
     def setUpTestData(cls):
         cls.user = create_an_user(1)
@@ -66,7 +68,7 @@ class UserLoginTest(TestCase):
 
     def test_can_register_logout_reset_password_request(self):
         # account creation
-        self.browser.get("http://localhost:8000/users/register/")
+        self.browser.get(f"{self.live_server_url}/users/register/")
         random_number = random.randint(0, 10000000000000000)
         email = self.browser.find_element(By.ID, "id_email")
         email.send_keys(f"test{random_number}@gmail.com")
@@ -82,12 +84,12 @@ class UserLoginTest(TestCase):
         self.assertIn("Vous êtes enregistré(e)...", message.text)
 
         # account logout
-        self.browser.get("http://localhost:8000/users/logout/")
+        self.browser.get(f"{self.live_server_url}/users/logout/")
         message = self.browser.find_element(By.CSS_SELECTOR, ".alert")
         self.assertIn("Vous êtes déconnecté(e)...", message.text)
 
         # asking a password reset
-        self.browser.get("http://127.0.0.1:8000/users/login/")
+        self.browser.get(f"{self.live_server_url}/users/login/")
         link = self.browser.find_element(
             By.CSS_SELECTOR,
             ".offset-md-3 > form:nth-child(1) > div:nth-child(5) > p:nth-child(1) > a:nth-child(1)",

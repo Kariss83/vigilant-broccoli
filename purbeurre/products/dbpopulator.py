@@ -4,7 +4,7 @@ import requests
 
 # from django.core.exceptions import ObjectDoesNotExist
 from .constants import CATEGORIES
-from products.models import Categories, Products
+from purbeurre.products.models import Categories, Products
 
 
 ####################################################################

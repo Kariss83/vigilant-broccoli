@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.utils.http import urlsafe_base64_decode
 
-from accounts.forms import (
+from purbeurre.accounts.forms import (
     CustomUserCreationForm,
     CustomAuthenticationForm,
     CustomUserChangeForm,

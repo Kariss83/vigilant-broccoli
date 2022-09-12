@@ -1,12 +1,12 @@
 import random
-from django.test import TestCase, Client
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver import FirefoxOptions
 
-from accounts.models import CustomUser
-from products.models import Products, Categories, Favorites
+from purbeurre.accounts.models import CustomUser
+from purbeurre.products.models import Products, Categories, Favorites
 
 opts = FirefoxOptions()
 opts.add_argument("--headless")
@@ -47,48 +47,44 @@ def create_a_favorite(user, searched_prod, replacement_prod):
     return favorite
 
 
-class UserLoginTest(TestCase):
+class UserLoginTest(StaticLiveServerTestCase):
     @classmethod
-    def setUpTestData(cls):
-        cls.user = create_an_user(1)
-        cls.user.set_password("monsupermotdepasse")
-        cls.user.save()
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.selenium = webdriver.Firefox(options=opts)
+        cls.selenium.implicitly_wait(10)
+        cls.user = CustomUser.objects.get(email="test1@gmail.com")
+
+        # cls.user = create_an_user(1)
+        # cls.user.set_password("monsupermotdepasse")
+        # cls.user.save()
         cls.cat = create_a_category("Test")
         for i in range(10):
             create_a_product(i, random.choice(["a", "b", "c", "d", "e"]), cls.cat)
         cls.prod1, cls.prod2 = Products.objects.all()[:2]
         cls.fav1 = create_a_favorite(cls.user, cls.prod1, cls.prod2)
 
-        cls.client = Client()
-
-    def setUp(self):
-        self.browser = webdriver.Firefox(options=opts)
+    @classmethod
+    def tearDownClass(cls):
+        cls.selenium.quit()
+        super().tearDownClass()
 
     def test_can_login(self):
-        self.browser.get("http://localhost:8000")
+        self.selenium.get(f"{self.live_server_url}")
 
-        h1text = self.browser.find_element(By.CSS_SELECTOR, ".text-white")
+        h1text = self.selenium.find_element(By.CSS_SELECTOR, ".text-white")
         self.assertTrue(h1text.is_displayed)
-        self.assertIn("Purbeurre", self.browser.title)
+        self.assertIn("Purbeurre", self.selenium.title)
         # self.assertIn('Du gras, oui, mais de qualité!', )
-        self.browser.find_element(By.CLASS_NAME, "bi-person-plus").click()
-        email = self.browser.find_element(By.ID, "id_email")
-        email.send_keys("test15@gmail.com")
-        password = self.browser.find_element(By.ID, "id_password")
+        self.selenium.find_element(By.CLASS_NAME, "bi-person-plus").click()
+        email = self.selenium.find_element(By.ID, "id_email")
+        email.send_keys("test1@gmail.com")
+        password = self.selenium.find_element(By.ID, "id_password")
         password.send_keys("monsupermotdepasse")
-        submit_button = self.browser.find_element(By.CSS_SELECTOR, ".btn")
+        submit_button = self.selenium.find_element(By.CSS_SELECTOR, ".btn")
         submit_button.click()
-        message = self.browser.find_element(By.CLASS_NAME, "alert")
+        message = self.selenium.find_element(By.CLASS_NAME, "alert")
         self.assertIn("Vous êtes connecté(e)!", message.text)
-        # user_id = CustomUser.objects.all()[0].id
-        # self.client.get(reverse('home'), follow=True)
-        # self.assertEqual(
-        #     int(self.client.session['_auth_user_id']),
-        #     user_id
-        #     )
-
-    def tearDown(self):
-        self.browser.quit()
 
 
 if __name__ == "__main__":

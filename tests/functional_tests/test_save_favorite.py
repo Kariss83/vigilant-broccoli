@@ -1,4 +1,5 @@
-from django.test import TestCase, Client
+from django.test import Client
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 
 from selenium import webdriver
 from selenium.webdriver import FirefoxOptions
@@ -7,7 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 
-from accounts.models import CustomUser
+from purbeurre.accounts.models import CustomUser
 
 
 opts = FirefoxOptions()
@@ -26,52 +27,63 @@ def scroll_shim(passed_in_driver, object):
     )
 
 
-class FavoritesTest(TestCase):
+def create_an_user(number):
+    user_test = CustomUser.objects.create(
+        email=f"test{number}@gmail.com", name=f"MRTest{number}"
+    )
+    return user_test
+
+
+class FavoritesTest(StaticLiveServerTestCase):
     @classmethod
-    def setUpTestData(cls):
-        CustomUser.objects.all().delete()
-        cls.client = Client()
-        cls.browser = webdriver.Firefox(options=opts)
-        # cls.browser = webdriver.Chrome(options=opts)
-        cls.browser.set_window_size(2400, 1000)
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.selenium = webdriver.Firefox(options=opts)
+        cls.selenium.implicitly_wait(10)
+        cls.selenium.set_window_size(2400, 1000)
+        cls.user = create_an_user(1)
+        cls.user.set_password("monsupermotdepasse")
+        cls.user.save()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.selenium.quit()
+        super().tearDownClass()
 
     def test_can_save_favorite(self):
-        self.browser.get("http://localhost:8000")
+        self.selenium.get(f"{self.live_server_url}")
 
-        self.browser.find_element(By.CLASS_NAME, "bi-person-plus").click()
-        username = self.browser.find_element(By.ID, "id_email")
-        username.send_keys("test15@gmail.com")
-        password = self.browser.find_element(By.ID, "id_password")
+        self.selenium.find_element(By.CLASS_NAME, "bi-person-plus").click()
+        username = self.selenium.find_element(By.ID, "id_email")
+        username.send_keys("test1@gmail.com")
+        password = self.selenium.find_element(By.ID, "id_password")
         password.send_keys("monsupermotdepasse")
-        submit_button = self.browser.find_element(By.CSS_SELECTOR, ".btn")
+        submit_button = self.selenium.find_element(By.CSS_SELECTOR, ".btn")
         submit_button.click()
-        message = self.browser.find_element(By.CLASS_NAME, "alert")
+        message = self.selenium.find_element(By.CLASS_NAME, "alert")
         self.assertIn("Vous êtes connecté(e)!", message.text)
 
-        search = self.browser.find_element(
+        search = self.selenium.find_element(
             By.CSS_SELECTOR, ".input-group > input:nth-child(1)"
         )
-        search.send_keys("coca")
-        submit_button = self.browser.find_element(By.ID, "button-addon2")
+        search.send_keys("test0")
+        submit_button = self.selenium.find_element(By.ID, "button-addon2")
         submit_button.click()
-        results = self.browser.find_element(By.CSS_SELECTOR, "#about")
-        self.assertIn("Volvic", results.text)
+        results = self.selenium.find_element(By.CSS_SELECTOR, "#about")
+        self.assertIn("test8", results.text)
 
-        elements = self.browser.find_elements(By.ID, "save_button")
-        scroll_shim(self.browser, elements[0])
+        elements = self.selenium.find_elements(By.ID, "save_button")
+        scroll_shim(self.selenium, elements[1])
 
-        actions = ActionChains(self.browser)
+        actions = ActionChains(self.selenium)
         # actions.move_to_element(elements[0])
         actions.click()
         actions.perform()
 
-        my_favs = self.browser.find_element(By.CSS_SELECTOR, ".nav-link-with-img")
-        my_favs.click()
-        saved = self.browser.find_element(By.CSS_SELECTOR, "div.col-lg-8:nth-child(1)")
-        self.assertIn("Perrier", saved.text)
-
-    def tearDown(self):
-        self.browser.quit()
+        # my_favs = self.selenium.find_element(By.XPATH, '//*[@id="save_button"]/i')
+        # my_favs.click()
+        saved = self.selenium.find_element(By.CSS_SELECTOR, "#page-top > header")
+        self.assertIn("test0", saved.text)
 
 
 if __name__ == "__main__":

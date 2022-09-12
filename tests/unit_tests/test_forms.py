@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from accounts.forms import (
+from purbeurre.accounts.forms import (
     CustomAuthenticationForm,
     CustomUserChangeForm,
     CustomPasswordResetForm,

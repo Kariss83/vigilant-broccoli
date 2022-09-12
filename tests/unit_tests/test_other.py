@@ -1,15 +1,17 @@
-""" This module is designed to host all the unit tests for the part of the
-program in charge of parsing the sentence the user will pass to GrandPy.
+""" This module is designed to host all the unit tests for parts of code
+that are not views, models or forms.
 """
 import random
 from django.test import TestCase
 
-from accounts.models import CustomUser
-from products.models import Categories, Favorites, Products
-from products.controllers.favorite_handling import SaveFavoriteProductModule as SFP
-from products.controllers.favorite_handling import GetAllFavoriteModule as GAF
-from products.controllers.get_product import GetProductModule as GP
-from products.controllers.find_substitute import SearchModule
+from purbeurre.accounts.models import CustomUser
+from purbeurre.products.models import Categories, Favorites, Products
+from purbeurre.products.controllers.favorite_handling import (
+    SaveFavoriteProductModule as SFP,
+)
+from purbeurre.products.controllers.favorite_handling import GetAllFavoriteModule as GAF
+from purbeurre.products.controllers.get_product import GetProductModule as GP
+from purbeurre.products.controllers.find_substitute import SearchModule
 
 
 def create_an_user(number):
@@ -54,8 +56,7 @@ class TestProductsModule(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        cls.user = create_an_user(1)
-        # import pdb; pdb.set_trace()
+        cls.user = CustomUser.objects.get(email="test1@gmail.com")
         cls.cat = create_a_category("Test")
         for i in range(10):
             create_a_product(i, random.choice(["a", "b", "c", "d", "e"]), cls.cat)
@@ -87,7 +88,6 @@ class TestProductsModule(TestCase):
         )
 
     def test_get_product_can_retrieve_a_given_object(self):
-        # import pdb; pdb.set_trace()
         prod = Products.objects.create(
             name="test",
             url="http://test.com",

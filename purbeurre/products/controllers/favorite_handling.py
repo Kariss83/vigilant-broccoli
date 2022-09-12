@@ -1,5 +1,5 @@
-from products.models import Products, Favorites
-from accounts.models import CustomUser
+from purbeurre.products.models import Products, Favorites
+from purbeurre.accounts.models import CustomUser
 
 
 class SaveFavoriteProductModule:

@@ -10,10 +10,10 @@ from django.contrib import auth
 from django.test import TestCase, Client
 from django.urls import reverse
 
-from accounts.forms import CustomAuthenticationForm
+from purbeurre.accounts.forms import CustomAuthenticationForm
 
-from accounts.models import CustomUser
-from products.models import Categories, Favorites, Products
+from purbeurre.accounts.models import CustomUser
+from purbeurre.products.models import Categories, Favorites, Products
 
 
 def mocked_send_mail():
@@ -96,7 +96,6 @@ class TestAccountsViewsModule(TestCase):
 
     def test_home_page_uses_item_form(self):
         response = self.client.get(self.login_url, follow=True)
-        # import pdb; pdb.set_trace()
         self.assertIsInstance(response.context["form"], CustomAuthenticationForm)
 
     def test_login_user_POST_invalid_form(self):
@@ -160,7 +159,6 @@ class TestAccountsViewsModule(TestCase):
 
     def test_profile_user_logged_in_GET(self):
         self.client.login(email="test@gmail.com", password="monsupermotdepasse")
-        # import pdb; pdb.set_trace()
         response = self.client.get(self.profile_url)
 
         self.assertEquals(response.status_code, 200)
@@ -253,13 +251,16 @@ class TestProductsViewsModule(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        cls.user = create_an_user(1)
-        cls.user.set_password("monsupermotdepasse")
-        cls.user.save()
+        cls.user = CustomUser.objects.get(email="test1@gmail.com")
+
+        # cls.user = create_an_user(1)
+        # cls.user.set_password("monsupermotdepasse")
+        # cls.user.save()
         cls.cat = create_a_category("Test")
         for i in range(10):
             create_a_product(i, random.choice(["a", "b", "c", "d", "e"]), cls.cat)
         cls.prod1, cls.prod2 = Products.objects.all()[:2]
+        # cls.fav1 = create_a_favorite(cls.user, cls.prod1, cls.prod2)
         cls.fav1 = create_a_favorite(cls.user, cls.prod1, cls.prod2)
 
         cls.client = Client()
@@ -346,12 +347,11 @@ class TestHomeViewsModule(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        cls.user = CustomUser.objects.create(
-            email="test@gmail.com",
-            name="MRTest",
-        )
-        cls.user.set_password("monsupermotdepasse")
-        cls.user.save()
+        cls.user = CustomUser.objects.get(email="test1@gmail.com")
+
+        # cls.user = create_an_user(1)
+        # cls.user.set_password("monsupermotdepasse")
+        # cls.user.save()
 
         cls.client = Client()
 
@@ -365,12 +365,12 @@ class TestHomeViewsModule(TestCase):
 
     def test_password_reset_POST(self):
         response = self.client.post(
-            self.pwd_reset_url, {"email": "test@gmail.com"}, follow=True
+            self.pwd_reset_url, {"email": "test1@gmail.com"}, follow=True
         )
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].subject, "Password Reset Requested")
         self.assertEqual(mail.outbox[0].from_email, "root@vps-8351387e.vps.ovh.net")
-        self.assertEqual(mail.outbox[0].to, ["test@gmail.com"])
+        self.assertEqual(mail.outbox[0].to, ["test1@gmail.com"])
 
     def test_password_reset_POST_invalid_address(self):
         response = self.client.post(
@@ -383,11 +383,11 @@ class TestHomeViewsModule(TestCase):
         self.assertEqual(str(messages[0]), "Cet email est invalide.")
 
     def test_password_reset_POST_BadHeader(self):
-        with mock.patch("home.views.send_mail") as mocked_send_mail:
+        with mock.patch("purbeurre.home.views.send_mail") as mocked_send_mail:
             mocked_send_mail.side_effect = BadHeaderError
 
             response = self.client.post(
-                self.pwd_reset_url, {"email": "test@gmail.com"}, follow=True
+                self.pwd_reset_url, {"email": "test1@gmail.com"}, follow=True
             )
 
             self.assertTrue(mocked_send_mail.called)

@@ -1,6 +1,6 @@
 from django.urls import path
 
-from home.views import HomeView, LegalView
+from purbeurre.home.views import HomeView, LegalView
 from . import views
 
 app_name = "home"

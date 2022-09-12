@@ -3,7 +3,7 @@ from django.contrib.auth import forms
 from django.utils.translation import gettext_lazy as _
 
 
-from accounts.models import CustomUser
+from purbeurre.accounts.models import CustomUser
 
 
 class CustomAuthenticationForm(base_form.Form):

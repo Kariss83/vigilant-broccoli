@@ -12,8 +12,8 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 from django.contrib import messages  # import messages
 
-from accounts.models import CustomUser
-from accounts.forms import CustomPasswordResetForm
+from purbeurre.accounts.models import CustomUser
+from purbeurre.accounts.forms import CustomPasswordResetForm
 
 
 # Create your views here.
